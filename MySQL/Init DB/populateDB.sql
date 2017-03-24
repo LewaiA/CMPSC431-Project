@@ -1,0 +1,1 @@
+LOAD DATA LOCAL INFILE 'C:/Users/nscribano/Dropbox/School/16th Grade/CMPSC 431/Project/CMPSC431-Project/MySQL/Init DB/data/users.txt' INTO TABLE Users COLUMNS TERMINATED BY ',';

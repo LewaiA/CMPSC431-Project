@@ -5,11 +5,11 @@ USE himalaya;
 
 /* Add tables */
 CREATE TABLE Users(
-	gender CHAR(1),
+	email VARCHAR(100),
+    password VARCHAR(30),
     name VARCHAR(20),
-    pssword VARCHAR(30),
-    email VARCHAR(100),
-    phone VARCHAR(11),
+	gender CHAR(1),
+    phone VARCHAR(15),
     age INTEGER,
     reward_progress INTEGER,
     income REAL,
