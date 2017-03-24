@@ -17,17 +17,17 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE SocialAccnt( 
-	userID VARCHAR(20), 
+	email VARCHAR(100) NOT NULL,
+    username VARCHAR(20), 
 	type VARCHAR(20), 
-	email VARCHAR(100) NOT NULL,  
-	PRIMARY KEY(userID, email), 
+	PRIMARY KEY(username, email), 
 	FOREIGN KEY (email) REFERENCES Users (email)
 		ON DELETE CASCADE 
 );
 
 CREATE TABLE CCPayment( 
 	email VARCHAR(100) NOT NULL, 
-	number CHAR(16), 
+	number CHAR(19), 
 	type VARCHAR(20), 
 	expiration DATE, 
 	PRIMARY KEY(number, email), 
@@ -37,38 +37,39 @@ CREATE TABLE CCPayment(
 
 CREATE TABLE ShippingAddress( 
 	email VARCHAR(100) NOT NULL, 
-	ZIP CHAR(5), 
-	street VARCHAR(30), 
-	city VARCHAR(30),  
+	ZIP VARCHAR(5), 
+	street VARCHAR(50), 
+	city VARCHAR(50),  
 	state CHAR(2), 
-	PRIMARY KEY(street, email), 
+	PRIMARY KEY(email, ZIP, street, city, state), 
 	FOREIGN KEY(email) REFERENCES Users (email)
 		ON DELETE CASCADE 
 );
 
 CREATE TABLE Category( 
-	CID CHAR(4), 
-	itemID CHAR(10), 
-	PCID CHAR(4), 
+	CID INTEGER, 
+	PCID INTEGER, 
 	PRIMARY KEY(CID),
 	FOREIGN KEY(PCID) REFERENCES Category (CID)
 );
 
 CREATE TABLE Items(
-	url VARCHAR(255),  
-	itemID CHAR(10), 
+	itemID INTEGER, 
+    name VARCHAR(100),
+    description VARCHAR(500),
+    url VARCHAR(255),
 	qty INTEGER, 
-	CID CHAR(4) NOT NULL, 
-	PRIMARY KEY(itemID, CID), 
+	CID INTEGER NOT NULL, 
+	PRIMARY KEY(itemID), 
 	FOREIGN KEY(CID) REFERENCES Category (CID)
-		ON DELETE CASCADE 
+		ON DELETE CASCADE
 );
 
 CREATE TABLE Wishlist( 
 	wlID  CHAR(10), 
 	date_added  DATE, 
 	privacy   BOOLEAN, 
-	itemID  CHAR(10), 
+	itemID INTEGER, 
 	email  VARCHAR(100) NOT NULL, 
 	PRIMARY KEY(wlID, itemID, email), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID)
@@ -80,7 +81,7 @@ CREATE TABLE Wishlist(
 CREATE TABLE PriceWatcher( 
 	GID CHAR(4),
 	cur_date DATE,
-	itemID CHAR(10) NOT NULL, 
+	itemID INTEGER NOT NULL, 
 	PRIMARY KEY(GID, itemID),  
 	FOREIGN KEY(itemID) REFERENCES Wishlist (itemID) 
 		ON DELETE CASCADE 
@@ -90,7 +91,7 @@ CREATE TABLE ShoppingCart(
 	email VARCHAR(100) NOT NULL,  
 	total_price REAL,  
 	shipping_method  VARCHAR(100), 
-	itemID CHAR(10),  
+	itemID INTEGER,  
 	PRIMARY KEY (total_price, email, itemID), 
 	FOREIGN KEY(email) REFERENCES Users (email) 
 		ON DELETE CASCADE,
@@ -101,7 +102,7 @@ CREATE TABLE ShoppingCart(
 CREATE TABLE TreatYoSelf( 
 	email VARCHAR(100) NOT NULL,  
 	budget REAL,  
-	CID CHAR(4), 
+	CID INTEGER, 
 	PRIMARY KEY(email, budget), 
 	FOREIGN KEY(email) REFERENCES Users (email) 
 		ON DELETE CASCADE, 
@@ -109,7 +110,7 @@ CREATE TABLE TreatYoSelf(
 );
 
 CREATE TABLE DsaleMethod( 
-	itemID  CHAR(10) NOT NULL,  
+	itemID INTEGER NOT NULL,  
 	price REAL,  
 	PRIMARY KEY(price, itemID), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID) 
@@ -117,7 +118,7 @@ CREATE TABLE DsaleMethod(
 );
 
 CREATE TABLE BiddingMethod( 
-	itemID CHAR(10) NOT NULL, 
+	itemID INTEGER NOT NULL, 
 	min_bid REAL, 
 	current_bid REAL, 
 	PRIMARY KEY(itemID), 
@@ -127,7 +128,7 @@ CREATE TABLE BiddingMethod(
 
 CREATE TABLE Rating( 
 	email VARCHAR(100),  
-	itemID CHAR(10) NOT NULL,  
+	itemID INTEGER NOT NULL,  
 	stars INTEGER,  
 	review VARCHAR(500),  
 	PRIMARY KEY(stars, itemID, email), 
