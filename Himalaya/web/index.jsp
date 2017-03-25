@@ -3,6 +3,13 @@
     Created on : Mar 22, 2017, 4:52:26 PM
     Author     : nscribano
 --%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,5 +20,28 @@
     </head>
     <body>
         <h1>Welcome to Himalaya.com</h1>
+        <a href="allitems.jsp">All Items</a>
+        <h1>ItemIDs from Items table in Himalaya DB</h1>
+        <%
+            InitialContext initialContext = new InitialContext();
+            Context context = (Context) initialContext.lookup("java:comp/env");
+            //The JDBC Data source that we just created
+            DataSource ds = (DataSource) context.lookup("himalaya");
+            Connection connection = ds.getConnection();
+
+            if (connection == null)
+            {
+                throw new SQLException("Error establishing connection!");
+            }
+            String query = "SELECT * FROM Items";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next())
+            {
+                out.println(rs.getString("itemID"));
+            }
+        %>
     </body>
 </html>
