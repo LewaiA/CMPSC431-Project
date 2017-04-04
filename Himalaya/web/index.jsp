@@ -21,6 +21,7 @@
     <body>
         <h1>Welcome to Himalaya.com</h1>
         <a href="allitems.jsp">All Items</a>
+        <a href="newUser.jsp">New User</a>
         <h1>ItemIDs from Items table in Himalaya DB</h1>
         <%
             InitialContext initialContext = new InitialContext();
@@ -42,6 +43,8 @@
             {
                 out.println(rs.getString("itemID"));
             }
+            
+            connection.close();
         %>
     </body>
 </html>
