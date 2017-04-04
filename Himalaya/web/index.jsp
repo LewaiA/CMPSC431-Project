@@ -17,11 +17,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Himalaya.com</title>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        
     </head>
     <body>
         <h1>Welcome to Himalaya.com</h1>
-        <a href="allitems.jsp">All Items</a>
-        <a href="newUser.html">New User</a>
+        <a class="btn btn-primary btn-default" href="allitems.jsp">All Items</a>
+        <a class="btn btn-primary btn-default" href="newUser.html" role="button">New User</a>
+        
         <h1>ItemIDs from Items table in Himalaya DB</h1>
         <%
             InitialContext initialContext = new InitialContext();
