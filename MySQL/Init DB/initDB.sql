@@ -10,7 +10,7 @@ CREATE TABLE Users(
     name VARCHAR(20),
 	gender CHAR(1),
     phone VARCHAR(15),
-    age INTEGER,
+    dob DATE,
     reward_progress INTEGER,
     income REAL,
     PRIMARY KEY (email)
