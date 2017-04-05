@@ -22,7 +22,6 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/design.css" >
     </head>
     <body>
         <!-- Navigation bar-->
@@ -59,30 +58,32 @@
                 </ul>
             </div>
         </nav>
-      <%-- <a class="btn btn-primary btn default" href="index.jsp">himalaya.com</a> --%>
-      <h1>All Items</h1>
-        <%
-          InitialContext initialContext = new InitialContext();
-          Context context = (Context) initialContext.lookup("java:comp/env");
-          //The JDBC Data source that we just created
-          DataSource ds = (DataSource) context.lookup("himalaya");
-          Connection connection = ds.getConnection();
+        <%-- <a class="btn btn-primary btn default" href="index.jsp">himalaya.com</a> --%>
+        <div class="translucentDiv">
+            <h1>All Items</h1>
+            <%
+                InitialContext initialContext = new InitialContext();
+                Context context = (Context) initialContext.lookup("java:comp/env");
+                //The JDBC Data source that we just created
+                DataSource ds = (DataSource) context.lookup("himalaya");
+                Connection connection = ds.getConnection();
 
-          if (connection == null)
-          {
-              throw new SQLException("Error establishing connection!");
-          }
-          String query = "SELECT * FROM Items";
+                if (connection == null)
+                {
+                    throw new SQLException("Error establishing connection!");
+                }
+                String query = "SELECT * FROM Items";
 
-          PreparedStatement statement = connection.prepareStatement(query);
-          ResultSet rs = statement.executeQuery();
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet rs = statement.executeQuery();
 
-          while (rs.next())
-          {
-              out.println(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
-          }
+                while (rs.next())
+                {
+                    out.println(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+                }
 
-          connection.close();
-        %>
+                connection.close();
+            %>
+        </div>
     </body>
 </html>
