@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : newUser.jsp
     Created on : Apr 3, 2017, 10:39:14 PM
     Author     : nscribano
@@ -24,14 +24,16 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="design.css" >
     </head>
     <body>
+
         <h1>Registration Successful</h1>
         <a href="index.jsp">Return to Home Page</a>
     </body>
 </html>
 
-<% 
+<%
     if (request.getParameter("submit") != null) {
         InitialContext initialContext = new InitialContext();
         Context context = (Context) initialContext.lookup("java:comp/env");
@@ -78,4 +80,4 @@
 
         connection.close();
     }
-%>    
+%>
