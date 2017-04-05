@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="design.css" >
+        <link rel="stylesheet" href="css/design.css" >
     </head>
     <body>
     <!-- Navigation bar-->
@@ -43,10 +43,10 @@
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                    <div class="input-group">
-                     <input type="text" class="form-control" placeholder="Search for...">
-                     <span class="input-group-btn">
-                       <button class="btn btn-green" type="button">Go!</button>
-                     </span>
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-green" type="button">Go!</button>
+                        </span>
                    </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
             </form><!-- /.row -->
@@ -55,7 +55,6 @@
             <ul class= "nav navbar-nav navbar-right">
                 <li><a href="newUser.html">Register</a></li>
             </ul>
-        </div>
         </div>
     </nav>
     <!-- Navigation bar end-->

@@ -24,10 +24,42 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="design.css" >
+        <link rel="stylesheet" href="css/design.css" >
     </head>
     <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse1" aria-expanded="false">
+                    <span class="sr-only">Toggle Naviagtion</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.jsp">Himalaya.com</a>
+                </div>
 
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="allitems.jsp">All Items</a></li>
+                </ul>
+                <%-- Search Bar --%>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                       <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-green" type="button">Go!</button>
+                            </span>
+                       </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form><!-- /.row -->
+                <%-- Search Bar end --%>
+
+                <ul class= "nav navbar-nav navbar-right">
+                    <li><a href="newUser.html">Register</a></li>
+                </ul>
+            </div>
+        </nav>
         <h1>Registration Successful</h1>
         <a href="index.jsp">Return to Home Page</a>
     </body>
