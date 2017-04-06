@@ -36,57 +36,57 @@
         </script> 
         <!-- End load navigation bar -->
         <div class="translucentDiv">
-            <h1>Registration Successful</h1>
+            <%
+                try{
+                    if (request.getParameter("submit") != null) {
+                        InitialContext initialContext = new InitialContext();
+                        Context context = (Context) initialContext.lookup("java:comp/env");
+                        //The JDBC Data source that we just created
+                        DataSource ds = (DataSource) context.lookup("himalaya");
+                        Connection connection = ds.getConnection();
+
+                        if (connection == null)
+                        {
+                            throw new SQLException("Error establishing connection!");
+                        }
+
+                        Enumeration paramNames = request.getParameterNames();
+
+                        String ins = "INSERT INTO Users (email, password, name, gender, phone, dob, reward_progress, income)"
+                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        // create the mysql insert preparedstatement
+                        PreparedStatement preparedStmt = connection.prepareStatement(ins);
+                        preparedStmt.setString(1, request.getParameter("email"));
+                        preparedStmt.setString(2, request.getParameter("password"));
+                        preparedStmt.setString(3, request.getParameter("name"));
+                        preparedStmt.setString(4, request.getParameter("gender"));
+                        preparedStmt.setString(5, request.getParameter("phone"));
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        java.util.Date dob = format.parse(request.getParameter("dob"));
+                        //java.sql.Date sqlDob = new java.sql.Date(dob.getTime());
+                        preparedStmt.setDate(6, new java.sql.Date(dob.getTime()));
+
+                        preparedStmt.setInt(7, 0);
+                        preparedStmt.setInt(8, Integer.parseInt(request.getParameter("income")));
+
+                        
+                        // execute the preparedstatement
+                        preparedStmt.execute();
+
+                        out.println("<h1>Registration Successful</h1>");
+                        connection.close();
+                    }
+                }
+                catch (Exception e){
+                    out.println("<h1>Registration Unsuccessful! Please try again.</h1>");
+                    out.println("<h1>Error: " + e.getMessage() +"</h1>");
+                }
+            %>
             <a class="btn btn-default" href="index.jsp">Return to Home Page</a>
         </div>
     </body>
 </html>
 
-<%
-    if (request.getParameter("submit") != null) {
-        InitialContext initialContext = new InitialContext();
-        Context context = (Context) initialContext.lookup("java:comp/env");
-        //The JDBC Data source that we just created
-        DataSource ds = (DataSource) context.lookup("himalaya");
-        Connection connection = ds.getConnection();
 
-        if (connection == null)
-        {
-            throw new SQLException("Error establishing connection!");
-        }
-
-        Enumeration paramNames = request.getParameterNames();
-
-//            while(paramNames.hasMoreElements()) {
-//               String paramName = (String)paramNames.nextElement();
-//               out.print("<tr><td>" + paramName + "</td>\n");
-//               String paramValue = request.getParameter(paramName);
-//               out.println("<td> " + paramValue + "</td></tr>\n");
-//            }
-
-        String ins = "INSERT INTO Users (email, password, name, gender, phone, dob, reward_progress, income)"
-        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-
-        // create the mysql insert preparedstatement
-        PreparedStatement preparedStmt = connection.prepareStatement(ins);
-        preparedStmt.setString(1, request.getParameter("email"));
-        preparedStmt.setString(2, request.getParameter("password"));
-        preparedStmt.setString(3, request.getParameter("name"));
-        preparedStmt.setString(4, request.getParameter("gender"));
-        preparedStmt.setString(5, request.getParameter("phone"));
-        
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dob = format.parse(request.getParameter("dob"));
-        //java.sql.Date sqlDob = new java.sql.Date(dob.getTime());
-        preparedStmt.setDate(6, new java.sql.Date(dob.getTime()));
-        
-        preparedStmt.setInt(7, 0);
-        preparedStmt.setInt(8, Integer.parseInt(request.getParameter("income")));
-
-
-        // execute the preparedstatement
-        preparedStmt.execute();
-
-        connection.close();
-    }
-%>
