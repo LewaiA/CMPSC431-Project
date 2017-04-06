@@ -7,6 +7,7 @@
 .translucentDiv {
     background-color: #fff;
     background-color: rgba(255,255,255,0.75);
+    padding: 25px;
 }
 
 body{

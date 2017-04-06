@@ -35,9 +35,10 @@
             });
         </script> 
         <!-- End load navigation bar -->
-        
-        <h1>Registration Successful</h1>
-        <a href="index.jsp">Return to Home Page</a>
+        <div class="translucentDiv">
+            <h1>Registration Successful</h1>
+            <a class="btn btn-default" href="index.jsp">Return to Home Page</a>
+        </div>
     </body>
 </html>
 

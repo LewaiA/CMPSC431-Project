@@ -25,7 +25,7 @@
         <!-- End load navigation bar -->
         
         <div class="translucentDiv">
-            <h1>Create your Himalaya.com Account</h1>
+            <h1 align="center">Create your Himalaya.com Account</h1>
             <form name="registerUser" method="POST" action="newUser.jsp" onsubmit="return validate_form();">
                 <table align = "center" border="0" width="300">
                     <tr>
@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Phone number</td>
-                        <td><input type="text" name="phone" size="15"></td>
+                        <td><input type="text" name="phone" size="20"></td>
                     </tr>
                     <tr>
                         <td>Birth date</td>
@@ -61,17 +61,45 @@
                         <td><input type="number" name="income" size="20"></td>
                     </tr>
                     <tr>
-                        <td align = "center">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td align = "right">
                             <input type="submit" value="Register Account" name="submit">
                         </td>
-                        <td></td>
                     </tr>
                 </table>
             </form>
         </div>
         <script type="text/javascript">
             function validate_form(){
-                if (document.registerUser.email.value === ""){
+                if (document.registerUser.name.value.length > 20){
+                    alert("Name is limited to 20 characters");
+                    return false;
+                }
+                else if (document.registerUser.email.value.length > 100){
+                    alert("Email is limited to 100 characters");
+                    return false;
+                }
+                else if (document.registerUser.password.value.length > 30){
+                    alert("Password is limited to 30 characters");
+                    return false;
+                }
+                else if (document.registerUser.phone.value.length > 15){
+                    alert("Phone number is limited to 15 characters");
+                    return false;
+                }
+                else if (document.registerUser.dob.value.length > 10){
+                    alert("Date of birth is invalid");
+                    return false;
+                }
+                else if (document.registerUser.income.value.length > 10){
+                    alert("Income is limited to 10 digits");
+                    return false;
+                }
+                else if (document.registerUser.email.value === ""){
                     alert("An email address is required");
                     return false;
                 }
@@ -89,6 +117,10 @@
                 }
                 else if (document.registerUser.gender.value !== "M" && document.registerUser.gender.value !== "F"){
                     alert("Please enter either 'M' or 'F' for gender");
+                }
+                else if (document.registerUser.income.value === ""){
+                    alert("Annual income is required");
+                    return false;
                 }
                 else {
                     document.registerUser.submit();
