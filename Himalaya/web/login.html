@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
         <style type="text/css">
-        #loginBox{
-            width: 300px;
-            margin:0 auto;
-        }
+            #loginBox{
+                width: 300px;
+                margin:0 auto;
+            }
         </style>
     </head>
     <body>
@@ -26,12 +26,12 @@
         <div class="translucentDiv" id="loginBox">
             <form class="login" role="form" method="POST" action="login.jsp">
                 <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input type="text" name="email" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" name="password" placeholder="Password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-success">Sign In</button>
+                <button type="submit" name="submit" class="btn btn-success">Sign In</button>
             </form>
         </div>
     </body>

@@ -20,7 +20,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Log In</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <!-- Load navigation bar -->
@@ -48,32 +51,19 @@
                             throw new SQLException("Error establishing connection!");
                         }
 
-                        Enumeration paramNames = request.getParameterNames();
+                        // create the mysql insert preparedstatement
+                        PreparedStatement preparedStmt = connection.prepareStatement(""
+                                + "SELECT email,password FROM Users WHERE email=? AND password=?");
+                        preparedStmt.setString(1, request.getParameter("email"));
+                        preparedStmt.setString(2, request.getParameter("password"));
 
-//                        String ins = "INSERT INTO Users (email, password, name, gender, phone, dob, reward_progress, income)"
-//                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-//
-//                        // create the mysql insert preparedstatement
-//                        PreparedStatement preparedStmt = connection.prepareStatement(ins);
-//                        preparedStmt.setString(1, request.getParameter("email"));
-//                        preparedStmt.setString(2, request.getParameter("password"));
-//                        preparedStmt.setString(3, request.getParameter("name"));
-//                        preparedStmt.setString(4, request.getParameter("gender"));
-//                        preparedStmt.setString(5, request.getParameter("phone"));
-//
-//                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//                        java.util.Date dob = format.parse(request.getParameter("dob"));
-//                        //java.sql.Date sqlDob = new java.sql.Date(dob.getTime());
-//                        preparedStmt.setDate(6, new java.sql.Date(dob.getTime()));
-//
-//                        preparedStmt.setInt(7, 0);
-//                        preparedStmt.setInt(8, Integer.parseInt(request.getParameter("income")));
-//
-//
-//                        // execute the preparedstatement
-//                        preparedStmt.execute();
+                        // execute the preparedstatement
+                        ResultSet rs = preparedStmt.executeQuery();                        
+                        if(rs.next())           
+                           out.println("<h1>Valid login credentials</h1>");        
+                        else
+                           out.println("<h1>Invalid login credentials</h1>");
 
-                        out.println("<h1>Login Successful</h1>");
                         connection.close();
                     }
                 } catch (Exception e){
