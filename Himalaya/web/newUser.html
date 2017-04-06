@@ -30,35 +30,35 @@
                 <table align = "center" border="0" width="300">
                     <tr>
                         <td>Name</td>
-                        <td><input type="text" name="name" size="20"></td>
+                        <td><input required type="text" name="name" size="20"></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="text" name="email" size="20"></td>
+                        <td><input required type="text" name="email" size="20"></td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="password" size="20"></td>
+                        <td><input required type="password" name="password" size="20"></td>
                     </tr>
                     <tr>
                         <td>Confirm Password</td>
-                        <td><input type="password" name="confirmPassword" size="20"></td>
+                        <td><input required type="password" name="confirmPassword" size="20"></td>
                     </tr>
                     <tr>
                         <td>Gender</td>
-                        <td><input type="text" name="gender" size="1"></td>
+                        <td><input required type="text" name="gender" size="1"></td>
                     </tr>
                     <tr>
                         <td>Phone number</td>
-                        <td><input type="text" name="phone" size="20"></td>
+                        <td><input required type="text" name="phone" size="20"></td>
                     </tr>
                     <tr>
                         <td>Birth date</td>
-                        <td><input type="date" name="dob" size="20"></td>
+                        <td><input required type="date" name="dob" size="20"></td>
                     </tr>
                     <tr>
                         <td>Income</td>
-                        <td><input type="number" name="income" size="20"></td>
+                        <td><input required type="number" name="income" size="20"></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -67,7 +67,7 @@
                     <tr>
                         <td></td>
                         <td align = "right">
-                            <input type="submit" value="Register Account" name="submit">
+                            <input class="btn btn-default" type="submit" value="Register Account" name="submit">
                         </td>
                     </tr>
                 </table>
@@ -99,10 +99,6 @@
                     alert("Income is limited to 10 digits");
                     return false;
                 }
-                else if (document.registerUser.email.value === ""){
-                    alert("An email address is required");
-                    return false;
-                }
                 else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(document.registerUser.email.value)) {
                     alert("Please enter a valid email address");
                     return false;
@@ -117,10 +113,6 @@
                 }
                 else if (document.registerUser.gender.value !== "M" && document.registerUser.gender.value !== "F"){
                     alert("Please enter either 'M' or 'F' for gender");
-                }
-                else if (document.registerUser.income.value === ""){
-                    alert("Annual income is required");
-                    return false;
                 }
                 else {
                     document.registerUser.submit();
