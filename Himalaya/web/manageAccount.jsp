@@ -1,15 +1,9 @@
-<%--
-    Document   : index
-    Created on : Mar 22, 2017, 4:52:26 PM
-    Author     : nscribano
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Himalaya.com</title>
+        <title>Manage Account</title>
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -24,9 +18,11 @@
                 $("#navbar").replaceWith(data);
             });
         </script> 
-        <!-- End load navigation bar -->
+    <!-- End load navigation bar -->
     
-        <h1 align="center">Welcome to Himalaya.com</h1>
-    
+    <div class="translucentDiv">
+        <h1 align="center">Manage Account</h1>
+    </div>
+        
     </body>
 </html>
