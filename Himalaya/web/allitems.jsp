@@ -38,27 +38,37 @@
         <div class="translucentDiv">
             <h1>All Items</h1>
             <%
-                InitialContext initialContext = new InitialContext();
-                Context context = (Context) initialContext.lookup("java:comp/env");
-                //The JDBC Data source that we just created
-                DataSource ds = (DataSource) context.lookup("himalaya");
-                Connection connection = ds.getConnection();
+                try{
+                    InitialContext initialContext = new InitialContext();
+                    Context context = (Context) initialContext.lookup("java:comp/env");
+                    //The JDBC Data source that we just created
+                    DataSource ds = (DataSource) context.lookup("himalaya");
+                    Connection connection = ds.getConnection();
 
-                if (connection == null)
-                {
-                    throw new SQLException("Error establishing connection!");
+                    if (connection == null)
+                    {
+                        throw new SQLException("Error establishing connection!");
+                    }
+                    String query = "SELECT * FROM Items";
+
+                    PreparedStatement statement = connection.prepareStatement(query);
+                    ResultSet rs = statement.executeQuery();
+
+                    while (rs.next())
+                    {
+                        out.print("<a href=\"item.jsp?itemID="+
+                                rs.getString("itemID")
+                                +"\">");
+                        out.print(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+                        out.println("</a>");
+                    }
+
+                    connection.close();
                 }
-                String query = "SELECT * FROM Items";
-
-                PreparedStatement statement = connection.prepareStatement(query);
-                ResultSet rs = statement.executeQuery();
-
-                while (rs.next())
-                {
-                    out.println(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+                catch (Exception e){
+                    out.println("<h1>An error occurred<h1>");
+                    out.println("Error: " + e.getMessage());
                 }
-
-                connection.close();
             %>
         </div>
     </body>

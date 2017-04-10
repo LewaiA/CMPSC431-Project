@@ -26,7 +26,7 @@
         </script> 
         <!-- End load navigation bar -->
     
-        <h1 align="center">Welcome to Himalaya.com</h1>
+        <h1 align="center" style="color:white">Welcome to Himalaya.com</h1>
     
     </body>
 </html>

@@ -1,3 +1,11 @@
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +29,49 @@
     <!-- End load navigation bar -->
     
     <div class="translucentDiv">
-        <h1 align="center">Item</h1>
+        <%
+            try {
+                if (request.getParameter("itemID") != null){
+                    InitialContext initialContext = new InitialContext();
+                    Context context = (Context) initialContext.lookup("java:comp/env");
+                    //The JDBC Data source that we just created
+                    DataSource ds = (DataSource) context.lookup("himalaya");
+                    Connection connection = ds.getConnection();
+
+                    if (connection == null)
+                    {
+                        throw new SQLException("Error establishing connection!");
+                    }
+
+                    // create the mysql insert preparedstatement
+                    PreparedStatement preparedStmt = connection.prepareStatement(""
+                            + "SELECT * FROM Items WHERE itemID=?");
+                    preparedStmt.setString(1, request.getParameter("itemID"));
+
+                    // execute the preparedstatement
+                    ResultSet rs = preparedStmt.executeQuery();                        
+                    if(rs.next()) {       
+                        out.print("<h1>");
+                        out.print(rs.getString("name"));
+                        out.print("</h1>");
+                        
+                        out.print("<h3>");
+                        out.print(rs.getString("description"));
+                        out.print("</h3>");
+                        
+                    }
+                    else {
+                       out.println("<h1>An error occurred</h1>");
+                    }
+
+                    connection.close();
+                }
+            }
+            catch (Exception e){
+                    out.println("<h1>An error occurred<h1>");
+                    out.println("Error: " + e.getMessage());
+            }
+        %>
     </div>
         
     </body>

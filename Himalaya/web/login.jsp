@@ -36,7 +36,7 @@
         </script> 
         <!-- End load navigation bar -->
         
-        <div class="translucentDiv">
+        <div align="center" class="translucentDiv">
             <%
                 try{
                     if (request.getParameter("submit") != null) {
@@ -60,12 +60,12 @@
                         // execute the preparedstatement
                         ResultSet rs = preparedStmt.executeQuery();                        
                         if(rs.next()) {       
-                           out.println("<h1>Valid login credentials</h1>");  
+                           out.println("<h1>Login successful</h1>");  
                            request.getSession().setAttribute("email", request.getParameter("email"));
                            request.getSession().setAttribute("name", rs.getString(3));
                         }
                         else {
-                           out.println("<h1>Invalid login credentials</h1>");
+                           out.println("<h1>Login failed. Invalid login credentials</h1>");
                         }
                         
                         connection.close();

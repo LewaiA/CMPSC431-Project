@@ -20,9 +20,18 @@
         </script> 
     <!-- End load navigation bar -->
     
-    <div class="translucentDiv">
-        <h1 align="center">Log out</h1>
-        <% request.getSession().invalidate();%>
+    <div class="translucentDiv" align="center">
+        <h1 align="center">You have been logged out</h1>
+        <% 
+            try {
+                request.getSession().invalidate();
+            }
+            catch (Exception e){
+                    out.println("<h1>An error occurred<h1>");
+                    out.println("Error: " + e.getMessage());
+            }
+        %>
+        <a class="btn btn-default" href="index.jsp">Return to Home Page</a>
     </div>
         
     </body>
