@@ -33,15 +33,16 @@
             <form class="navbar-form navbar-right" role="form">
                 <%
                     if(request.getSession().getAttribute("email") != null){
-                            out.println("<span style=\"color:white;\">Hello, " + 
-                                request.getSession().getAttribute("name") +
-                                "</span>"); %>
-                            <a class="btn btn-default" href="logout.jsp">Log Out</a>
-                        <% }
-                        else { %>
-                            <a class="btn btn-success" href="login.html">Sign In</a>
-                            <a class="btn btn-default" href="newUser.html">Register</a>
-                        <% } 
+                        out.println("<span style=\"color:white;\">Hello, " + 
+                            request.getSession().getAttribute("name") +
+                            "</span>"); %>
+                            <a class="btn btn-default glyphicon glyphicon-cog" href="manageAccount.jsp"></a>
+                        <a class="btn btn-default" href="logout.jsp">Log Out</a>
+                    <% }
+                    else { %>
+                        <a class="btn btn-success" href="login.html">Sign In</a>
+                        <a class="btn btn-default" href="newUser.html">Register</a>
+                    <% } 
                 %>
             </form>
         </div>
