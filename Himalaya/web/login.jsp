@@ -30,7 +30,7 @@
         <div id="navbar"></div>
         <script src="//code.jquery.com/jquery.min.js"></script>
         <script>
-            $.get("navbar.html", function(data){
+            $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
         </script> 
@@ -53,17 +53,21 @@
 
                         // create the mysql insert preparedstatement
                         PreparedStatement preparedStmt = connection.prepareStatement(""
-                                + "SELECT email,password FROM Users WHERE email=? AND password=?");
+                                + "SELECT email,password,name FROM Users WHERE email=? AND password=?");
                         preparedStmt.setString(1, request.getParameter("email"));
                         preparedStmt.setString(2, request.getParameter("password"));
 
                         // execute the preparedstatement
                         ResultSet rs = preparedStmt.executeQuery();                        
-                        if(rs.next())           
-                           out.println("<h1>Valid login credentials</h1>");        
-                        else
+                        if(rs.next()) {       
+                           out.println("<h1>Valid login credentials</h1>");  
+                           request.getSession().setAttribute("email", request.getParameter("email"));
+                           request.getSession().setAttribute("name", rs.getString(3));
+                        }
+                        else {
                            out.println("<h1>Invalid login credentials</h1>");
-
+                        }
+                        
                         connection.close();
                     }
                 } catch (Exception e){

@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Telemarketing Report</title>
+        <title>Log out</title>
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -21,7 +21,8 @@
     <!-- End load navigation bar -->
     
     <div class="translucentDiv">
-        <h1 align="center">Telemarketing Report</h1>
+        <h1 align="center">Log out</h1>
+        <% request.getSession().invalidate();%>
     </div>
         
     </body>

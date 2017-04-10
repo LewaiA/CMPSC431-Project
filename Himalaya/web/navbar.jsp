@@ -31,8 +31,18 @@
             <%-- Search Bar end --%>
             
             <form class="navbar-form navbar-right" role="form">
-                <a class="btn btn-success" href="login.html">Sign In</a>
-                <a class="btn btn-default" href="newUser.html">Register</a>
+                <%
+                    if(request.getSession().getAttribute("email") != null){
+                            out.println("<span style=\"color:white;\">Hello, " + 
+                                request.getSession().getAttribute("name") +
+                                "</span>"); %>
+                            <a class="btn btn-default" href="logout.jsp">Log Out</a>
+                        <% }
+                        else { %>
+                            <a class="btn btn-success" href="login.html">Sign In</a>
+                            <a class="btn btn-default" href="newUser.html">Register</a>
+                        <% } 
+                %>
             </form>
         </div>
     </div>
