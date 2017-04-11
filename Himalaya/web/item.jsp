@@ -43,25 +43,57 @@
                         throw new SQLException("Error establishing connection!");
                     }
 
-                    // create the mysql insert preparedstatement
-                    PreparedStatement preparedStmt = connection.prepareStatement(""
-                            + "SELECT * FROM Items WHERE itemID=?");
+                    // --- Get item information --- //
+                    PreparedStatement preparedStmt = connection.prepareStatement(
+                            "SELECT * FROM Items I WHERE I.itemID=?");
                     preparedStmt.setString(1, request.getParameter("itemID"));
-
-                    // execute the preparedstatement
                     ResultSet rs = preparedStmt.executeQuery();                        
                     if(rs.next()) {       
                         out.print("<h1>");
                         out.print(rs.getString("name"));
                         out.print("</h1>");
                         
-                        out.print("<h3>");
+                        out.print("<h4>Quantity available: ");
+                        out.print(rs.getString("qty"));
+                        out.print("</h4>");
+                        
+                        out.print("<h4>Description: ");
                         out.print(rs.getString("description"));
-                        out.print("</h3>");
+                        out.print("</h4>");
+                        
+                        out.print("<h4>Seller URL: ");
+                        out.print(rs.getString("url"));
+                        out.print("</h4>");
                         
                     }
                     else {
                        out.println("<h1>An error occurred</h1>");
+                    }
+                    
+                    // --- Get DsaleMethod information (if exists) --- //
+                    preparedStmt = connection.prepareStatement(
+                            "SELECT * FROM DsaleMethod WHERE itemID=?");
+                    preparedStmt.setString(1, request.getParameter("itemID"));
+                    rs = preparedStmt.executeQuery();                        
+                    if(rs.next()) {       
+                        out.print("<h4>Price: $");
+                        out.print(rs.getString("price") + " ");
+                        out.print("<a class=\"btn btn-default\">Buy Now</a>");
+                        out.print("</h4>");
+                    }
+                    
+                    // --- Get BiddingMethod information (if exists) --- //
+                    preparedStmt = connection.prepareStatement(
+                            "SELECT * FROM BiddingMethod WHERE itemID=?");
+                    preparedStmt.setString(1, request.getParameter("itemID"));
+                    rs = preparedStmt.executeQuery();                        
+                    if(rs.next()) {       
+                        out.print("<h4>Minimum bid: $");
+                        out.print(rs.getString("min_bid") + " ");
+                        out.print("Current bid: $");
+                        out.print(rs.getString("current_bid") + " ");
+                        out.print("<a class=\"btn btn-default\">Place $2 bid</a>");
+                        out.print("</h4>");
                     }
 
                     connection.close();

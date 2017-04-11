@@ -30,35 +30,76 @@
                 <table align = "center" border="0" width="300">
                     <tr>
                         <td>Name</td>
-                        <td><input required type="text" name="name" size="20"></td>
+                        <td><input required type="text" name="name"></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input required type="text" name="email" size="20"></td>
+                        <td><input required type="email" name="email"></td>
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input required type="password" name="password" size="20"></td>
+                        <td><input required type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td>Confirm Password</td>
-                        <td><input required type="password" name="confirmPassword" size="20"></td>
+                        <td>Confirm password</td>
+                        <td><input required type="password" name="confirmPassword"></td>
                     </tr>
                     <tr>
                         <td>Gender</td>
-                        <td><input required type="text" name="gender" size="1"></td>
+                        <td>
+                            <select name="gender">
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Phone number</td>
-                        <td><input required type="text" name="phone" size="20"></td>
+                        <td><input required type="tel" name="phone"></td>
                     </tr>
                     <tr>
                         <td>Birth date</td>
-                        <td><input required type="date" name="dob" size="20"></td>
+                        <td><input required type="date" name="dob"></td>
                     </tr>
                     <tr>
-                        <td>Income</td>
-                        <td><input required type="number" name="income" size="20"></td>
+                        <td>Income ($)</td>
+                        <td><input required type="number" name="income"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr> 
+                    <tr>
+                        <td>Address</td>
+                        <td><input required placeholder="Street" type="text" name="street"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input required placeholder="City" type="text" name="city"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input required placeholder="State" type="text" name="state"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input required placeholder="ZIP" type="text" name="ZIP"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr> 
+                    <tr>
+                        <td>Credit card</td>
+                        <td><input required placeholder="Number" type="text" name="ccNumber"></td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td><input required placeholder="Ex. Visa" type="text" name="ccType"></td>
+                    </tr>
+                    <tr>
+                        <td>Expiration date</td>
+                        <td><input required type="date" name="ccExpiration"></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -113,6 +154,34 @@
                 }
                 else if (document.registerUser.gender.value !== "M" && document.registerUser.gender.value !== "F"){
                     alert("Please enter either 'M' or 'F' for gender");
+                }
+                else if (document.registerUser.street.value.length > 50){
+                    alert("Street address is limited to 50 characters");
+                    return false;
+                }
+                else if (document.registerUser.city.value.length > 50){
+                    alert("City is limited to 50 characters");
+                    return false;
+                }
+                else if (document.registerUser.state.value.length > 2){
+                    alert("State is limited to 2 characters");
+                    return false;
+                }
+                else if (document.registerUser.ZIP.value.length > 5){
+                    alert("ZIP code is limited to 5 characters");
+                    return false;
+                }
+                else if (document.registerUser.ccNumber.value.length > 19){
+                    alert("Credit card number is limited to 19 characters");
+                    return false;
+                }
+                else if (document.registerUser.ccType.value.length > 20){
+                    alert("Credit card type is limited to 20 characters");
+                    return false;
+                }
+                else if (document.registerUser.ccExpiration.value.length > 10){
+                    alert("Credit card expiration date is invalid");
+                    return false;
                 }
                 else {
                     document.registerUser.submit();

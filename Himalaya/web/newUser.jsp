@@ -50,13 +50,9 @@
                             throw new SQLException("Error establishing connection!");
                         }
 
-                        Enumeration paramNames = request.getParameterNames();
-
-                        String ins = "INSERT INTO Users (email, password, name, gender, phone, dob, reward_progress, income)"
-                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-
-                        // create the mysql insert preparedstatement
-                        PreparedStatement preparedStmt = connection.prepareStatement(ins);
+                        // --- Insert data into Users --- //
+                        PreparedStatement preparedStmt = connection.prepareStatement("INSERT INTO Users (email, password, name, gender, phone, dob, reward_progress, income)"
+                        + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
                         preparedStmt.setString(1, request.getParameter("email"));
                         preparedStmt.setString(2, request.getParameter("password"));
                         preparedStmt.setString(3, request.getParameter("name"));
@@ -65,15 +61,33 @@
 
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         java.util.Date dob = format.parse(request.getParameter("dob"));
-                        //java.sql.Date sqlDob = new java.sql.Date(dob.getTime());
                         preparedStmt.setDate(6, new java.sql.Date(dob.getTime()));
 
                         preparedStmt.setInt(7, 0);
                         preparedStmt.setInt(8, Integer.parseInt(request.getParameter("income")));
 
+                        preparedStmt.execute();             // execute the preparedstatement
                         
-                        // execute the preparedstatement
-                        preparedStmt.execute();
+                        // --- Insert data into ShippingAddress --- //
+                        preparedStmt = connection.prepareStatement("INSERT INTO ShippingAddress (email, ZIP, street, city, state)"
+                        + " VALUES(?, ?, ?, ?, ?)");
+                        preparedStmt.setString(1, request.getParameter("email"));
+                        preparedStmt.setString(2, request.getParameter("ZIP"));
+                        preparedStmt.setString(3, request.getParameter("street"));
+                        preparedStmt.setString(4, request.getParameter("city"));
+                        preparedStmt.setString(5, request.getParameter("state"));
+                        preparedStmt.execute();             // execute the preparedstatement
+                        
+                        // --- Insert data into CCPayment --- //
+                        preparedStmt = connection.prepareStatement("INSERT INTO CCPayment (email, number, type, expiration)"
+                        + " VALUES(?, ?, ?, ?)");
+                        preparedStmt.setString(1, request.getParameter("email"));
+                        preparedStmt.setString(2, request.getParameter("ccNumber"));
+                        preparedStmt.setString(3, request.getParameter("ccType"));
+                        format = new SimpleDateFormat("yyyy-MM");
+                        java.util.Date ccExp = format.parse(request.getParameter("ccExpiration"));
+                        preparedStmt.setDate(4, new java.sql.Date(ccExp.getTime()));
+                        preparedStmt.execute();             // execute the preparedstatement
 
                         out.println("<h1>Registration Successful</h1>");
                         connection.close();
