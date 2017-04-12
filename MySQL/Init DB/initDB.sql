@@ -122,9 +122,11 @@ CREATE TABLE BiddingMethod(
 	itemID INTEGER NOT NULL, 
 	min_bid REAL, 
 	current_bid REAL, 
+    current_bidder VARCHAR(100),
 	PRIMARY KEY(itemID), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID) 
-		ON DELETE CASCADE 
+		ON DELETE CASCADE ,
+	FOREIGN KEY(current_bidder) REFERENCES Users (email)
 );
 
 CREATE TABLE Rating( 
