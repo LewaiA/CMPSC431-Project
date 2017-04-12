@@ -50,9 +50,6 @@
                         preparedStmt.setString(3, request.getParameter("itemID"));
                         preparedStmt.executeUpdate();
 
-                        //request.setAttribute("newBid", null);
-                        //request.getSession().invalidate();
-
                         connection.close();
                     }
 
@@ -115,11 +112,18 @@
                         if(rs.next()) {       
                             out.print("<h4>Current bid: $");
                             out.print(rs.getString("current_bid") + " ");
+                            out.print("&nbsp;Current bidder: ");
+                            out.print(rs.getString("current_bidder"));
+                            
+                            
                             out.print("<form name=\"bidOnItem\" method=\"POST\" action=\"item.jsp?itemID="
                                     + request.getParameter("itemID")
                                     + "\" onsubmit=\"return validate_bid();\">");
                             out.print("<input type=\"hidden\" name=\"email\" value=\""
                                     + request.getSession().getAttribute("email")
+                                    + "\">");
+                            out.print("<input type=\"hidden\" name=\"prevBid\" value=\""
+                                    + rs.getString("current_bid")
                                     + "\">");
                             %>        
                                 <input type="number" name="newBid">
@@ -141,8 +145,15 @@
             
         <script type="text/javascript">
             function validate_bid(){
-                if (document.bidOnItem.newBid.value.length < 0){
-                    alert("");
+                var newBid = document.bidOnItem.newBid.value;
+                var prevBid = document.bidOnItem.prevBid.value;
+                
+                if (parseInt(newBid) < parseInt(prevBid) + 2){
+                    alert("New bid must be at least $2 greater");
+                    return false;
+                }
+                else if(newBid === ""){
+                    alert("No bid entered");
                     return false;
                 }
                 else {
