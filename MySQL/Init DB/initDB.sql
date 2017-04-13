@@ -129,6 +129,17 @@ CREATE TABLE BiddingMethod(
 	FOREIGN KEY(current_bidder) REFERENCES Users (email)
 );
 
+CREATE TABLE PurchaseHistory(
+	email VARCHAR(100),
+    itemID INTEGER NOT NULL,
+    date DATE,
+    quantity INTEGER,
+	pricePaid REAL,
+    PRIMARY KEY(email,itemID,date),
+    FOREIGN KEY (itemID) REFERENCES Items (itemID),
+    FOREIGN KEY (email) REFERENCES Users (email)
+);
+
 CREATE TABLE Rating( 
 	email VARCHAR(100),  
 	itemID INTEGER NOT NULL,  

@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -33,6 +35,37 @@
         <div class="translucentDiv">
             <%
                 try {
+                    if (request.getParameter("submitBuy") != null){
+                        // --- Check that user is logged in --- //
+                        if (request.getSession().getAttribute("email") == null){
+                            out.println("<h3 style=\"color:red;display:table;margin:0 auto;\">You must be logged in to buy an item</h3>");
+                        }
+                        else {
+                            InitialContext initialContext = new InitialContext();
+                            Context context = (Context) initialContext.lookup("java:comp/env");
+                            DataSource ds = (DataSource) context.lookup("himalaya");
+                            Connection connection = ds.getConnection();
+
+                            if (connection == null)
+                            {
+                                throw new SQLException("Error establishing connection!");
+                            }
+
+                            // --- Place bid --- //
+                            PreparedStatement preparedStmt = connection.prepareStatement(
+                                    "INSERT INTO PurchaseHistory VALUES(?, ?, ?, 1, ?)");
+                            preparedStmt.setString(1, request.getParameter("email"));
+                            preparedStmt.setString(2, request.getParameter("itemID"));
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            java.util.Date now = new java.util.Date();
+                            preparedStmt.setDate(3, new java.sql.Date(now.getTime()));
+                            preparedStmt.setString(4, request.getParameter("price"));
+                            preparedStmt.executeUpdate();
+
+                            connection.close();
+                        }
+                    }
+                    
                     if (request.getParameter("submitBid") != null){
                         // --- Check that user is logged in --- //
                         if (request.getSession().getAttribute("email") == null){
@@ -108,7 +141,17 @@
                         if(rs.next()) {       
                             out.print("<h4>Price: $");
                             out.print(rs.getString("price") + " ");
-                            out.print("<a class=\"btn btn-default\">Buy Now</a>");
+                            out.print("<form name=\"buyItem\" method=\"POST\" action=\"item.jsp?itemID="
+                                    + request.getParameter("itemID")
+                                    + "\" onsubmit=\"return validate_buy();\">");
+                            out.print("<input type=\"hidden\" name=\"email\" value=\""
+                                    + request.getSession().getAttribute("email")
+                                    + "\">");
+                            out.print("<input type=\"hidden\" name=\"price\" value=\""
+                                    + rs.getString("price")
+                                    + "\">");
+                            out.print("<input type=\"submit\" name=\"submitBuy\" class=\"btn btn-default\" value=\"Buy Now\">");
+                            out.print("</form>");
                             out.print("</h4>");
                         }
 
@@ -155,6 +198,10 @@
         </div>
             
         <script type="text/javascript">
+            function validate_buy(){
+                document.bidOnItem.submit();
+            }
+            
             function validate_bid(){
                 var newBid = document.bidOnItem.newBid.value;
                 var prevBid = document.bidOnItem.prevBid.value;
