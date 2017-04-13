@@ -2,7 +2,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse1" aria-expanded="false">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
             <span class="sr-only">Toggle Navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -15,19 +15,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="allitems.jsp">All Items</a></li>
+                <li class=""><a href="allitems.jsp">All Items</a></li>
+                <li class=""><a href="browseItems.jsp">Browse</a></li>
             </ul>
             <%-- Search Bar --%>
             <form class="navbar-form navbar-left" role="search" action="searchResults.jsp">
-                <div class="form-group">
-                   <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-green" type="button">Go!</button>
-                        </span>
-                   </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </form><!-- /.row -->
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <%-- Search Bar end --%>
             
             <form class="navbar-form navbar-right" role="form">
