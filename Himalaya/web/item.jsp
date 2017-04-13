@@ -34,25 +34,31 @@
             <%
                 try {
                     if (request.getParameter("submitBid") != null){
-                        InitialContext initialContext = new InitialContext();
-                        Context context = (Context) initialContext.lookup("java:comp/env");
-                        DataSource ds = (DataSource) context.lookup("himalaya");
-                        Connection connection = ds.getConnection();
-
-                        if (connection == null)
-                        {
-                            throw new SQLException("Error establishing connection!");
+                        // --- Check that user is logged in --- //
+                        if (request.getSession().getAttribute("email") == null){
+                            out.println("<h3 style=\"color:red;display:table;margin:0 auto;\">You must be logged in to place a bid</h3>");
                         }
+                        else {
+                            InitialContext initialContext = new InitialContext();
+                            Context context = (Context) initialContext.lookup("java:comp/env");
+                            DataSource ds = (DataSource) context.lookup("himalaya");
+                            Connection connection = ds.getConnection();
 
-                        // --- Get item information --- //
-                        PreparedStatement preparedStmt = connection.prepareStatement(
-                                "UPDATE BiddingMethod SET current_bid = ?, current_bidder = ? WHERE itemID = ?");
-                        preparedStmt.setString(1, request.getParameter("newBid"));
-                        preparedStmt.setString(2, request.getParameter("email"));
-                        preparedStmt.setString(3, request.getParameter("itemID"));
-                        preparedStmt.executeUpdate();
+                            if (connection == null)
+                            {
+                                throw new SQLException("Error establishing connection!");
+                            }
 
-                        connection.close();
+                            // --- Place bid --- //
+                            PreparedStatement preparedStmt = connection.prepareStatement(
+                                    "UPDATE BiddingMethod SET current_bid = ?, current_bidder = ? WHERE itemID = ?");
+                            preparedStmt.setString(1, request.getParameter("newBid"));
+                            preparedStmt.setString(2, request.getParameter("email"));
+                            preparedStmt.setString(3, request.getParameter("itemID"));
+                            preparedStmt.executeUpdate();
+
+                            connection.close();
+                        }
                     }
 
                     if (request.getParameter("itemID") != null){
@@ -127,6 +133,9 @@
                             out.print("<input type=\"hidden\" name=\"prevBid\" value=\""
                                     + rs.getString("current_bid")
                                     + "\">");
+                            out.print("<input type=\"hidden\" name=\"minBid\" value=\""
+                                    + rs.getString("min_bid")
+                                    + "\">");
                             %>        
                                 <input type="number" name="newBid">
                                 <input type="submit" name="submitBid" class="btn btn-default" value="Place bid">
@@ -149,9 +158,14 @@
             function validate_bid(){
                 var newBid = document.bidOnItem.newBid.value;
                 var prevBid = document.bidOnItem.prevBid.value;
+                var minBid = document.bidOnItem.minBid.value;
                 
                 if (parseInt(newBid) < parseInt(prevBid) + 2){
                     alert("New bid must be at least $2 greater");
+                    return false;
+                }
+                else if (parseInt(newBid) < parseInt(minBid)){
+                    alert("The reserve price has not been reached. Please increase your bid.");
                     return false;
                 }
                 else if(newBid === ""){
