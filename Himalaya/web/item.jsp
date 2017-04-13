@@ -53,13 +53,15 @@
 
                             // --- Place bid --- //
                             PreparedStatement preparedStmt = connection.prepareStatement(
-                                    "INSERT INTO PurchaseHistory VALUES(?, ?, ?, 1, ?)");
+                                    "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?)");
                             preparedStmt.setString(1, request.getParameter("email"));
                             preparedStmt.setString(2, request.getParameter("itemID"));
                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                             java.util.Date now = new java.util.Date();
                             preparedStmt.setDate(3, new java.sql.Date(now.getTime()));
-                            preparedStmt.setString(4, request.getParameter("price"));
+                            preparedStmt.setString(4, request.getParameter("quantity"));
+                            Integer price = (new Integer(request.getParameter("quantity"))) * new Integer(request.getParameter("price"));
+                            preparedStmt.setString(5, price.toString());
                             preparedStmt.executeUpdate();
 
                             connection.close();
@@ -150,6 +152,7 @@
                             out.print("<input type=\"hidden\" name=\"price\" value=\""
                                     + rs.getString("price")
                                     + "\">");
+                            out.print("<input type=\"number\" name=\"quantity\" placeholder=\"Quantity\">");
                             out.print("<input type=\"submit\" name=\"submitBuy\" class=\"btn btn-default\" value=\"Buy Now\">");
                             out.print("</form>");
                             out.print("</h4>");
