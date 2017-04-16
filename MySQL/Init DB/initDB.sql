@@ -132,7 +132,7 @@ CREATE TABLE BiddingMethod(
 CREATE TABLE PurchaseHistory(
 	email VARCHAR(100),
     itemID INTEGER NOT NULL,
-    date DATE,
+    date DATETIME,
     quantity INTEGER,
 	pricePaid REAL,
     PRIMARY KEY(email,itemID,date),

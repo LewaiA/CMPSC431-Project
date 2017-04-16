@@ -21,7 +21,6 @@
         
     <!-- Load navigation bar -->
         <div id="navbar"></div>
-        <script src="//code.jquery.com/jquery.min.js"></script>
         <script>
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);

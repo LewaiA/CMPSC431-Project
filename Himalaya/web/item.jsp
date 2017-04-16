@@ -24,7 +24,6 @@
     <body>
         <!-- Load navigation bar -->
         <div id="navbar"></div>
-        <script src="//code.jquery.com/jquery.min.js"></script>
         <script>
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
@@ -51,19 +50,22 @@
                                 throw new SQLException("Error establishing connection!");
                             }
 
-                            // --- Place bid --- //
+                            // --- Place buy --- //
                             PreparedStatement preparedStmt = connection.prepareStatement(
                                     "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?)");
                             preparedStmt.setString(1, request.getParameter("email"));
                             preparedStmt.setString(2, request.getParameter("itemID"));
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             java.util.Date now = new java.util.Date();
-                            preparedStmt.setDate(3, new java.sql.Date(now.getTime()));
+                            String dateTime = format.format(now);
+                            preparedStmt.setString(3, dateTime);
                             preparedStmt.setString(4, request.getParameter("quantity"));
                             Integer price = (new Integer(request.getParameter("quantity"))) * new Integer(request.getParameter("price"));
                             preparedStmt.setString(5, price.toString());
                             preparedStmt.executeUpdate();
 
+                            out.println("<h3 style=\"color:green;display:table;margin:0 auto;\">You have successfully bought the item</h3>");
+                            
                             connection.close();
                         }
                     }
@@ -141,7 +143,7 @@
                         preparedStmt.setString(1, request.getParameter("itemID"));
                         rs = preparedStmt.executeQuery();                        
                         if(rs.next()) {       
-                            out.print("<h4>Price: $");
+                            out.print("<h4>Price per item: $");
                             out.print(rs.getString("price") + " ");
                             out.print("<form name=\"buyItem\" method=\"POST\" action=\"item.jsp?itemID="
                                     + request.getParameter("itemID")
