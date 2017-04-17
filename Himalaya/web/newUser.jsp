@@ -37,7 +37,7 @@
             });
         </script> 
         <!-- End load navigation bar -->
-        <div class="translucentDiv">
+        <div align="center" class="translucentDiv">
             <%
                 try{
                     if (request.getParameter("submit") != null) {

@@ -120,6 +120,15 @@
                         }
                         else {  // item not sold
                             out.print("<td>No</td>");
+                            preparedStmt = connection.prepareStatement(
+                                    "DELETE FROM BiddingMethod WHERE itemID=?");
+                            preparedStmt.setString(1, rs.getString("itemID"));
+                            preparedStmt.executeUpdate();
+                            
+                            preparedStmt = connection.prepareStatement(
+                                    "DELETE FROM Items WHERE itemID=?");
+                            preparedStmt.setString(1, rs.getString("itemID"));
+                            preparedStmt.executeUpdate();
                             
                         }
                         
