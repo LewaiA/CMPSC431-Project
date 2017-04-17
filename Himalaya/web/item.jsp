@@ -34,41 +34,7 @@
         <div class="translucentDiv">
             <%
                 try {
-                    if (request.getParameter("submitBuy") != null){
-                        // --- Check that user is logged in --- //
-                        if (request.getSession().getAttribute("email") == null){
-                            out.println("<h3 style=\"color:red;display:table;margin:0 auto;\">You must be logged in to buy an item</h3>");
-                        }
-                        else {
-                            InitialContext initialContext = new InitialContext();
-                            Context context = (Context) initialContext.lookup("java:comp/env");
-                            DataSource ds = (DataSource) context.lookup("himalaya");
-                            Connection connection = ds.getConnection();
-
-                            if (connection == null)
-                            {
-                                throw new SQLException("Error establishing connection!");
-                            }
-
-                            // --- Place buy --- //
-                            PreparedStatement preparedStmt = connection.prepareStatement(
-                                    "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?)");
-                            preparedStmt.setString(1, request.getParameter("email"));
-                            preparedStmt.setString(2, request.getParameter("itemID"));
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            java.util.Date now = new java.util.Date();
-                            String dateTime = format.format(now);
-                            preparedStmt.setString(3, dateTime);
-                            preparedStmt.setString(4, request.getParameter("quantity"));
-                            Integer price = (new Integer(request.getParameter("quantity"))) * new Integer(request.getParameter("price"));
-                            preparedStmt.setString(5, price.toString());
-                            preparedStmt.executeUpdate();
-
-                            out.println("<h3 style=\"color:green;display:table;margin:0 auto;\">You have successfully bought the item</h3>");
-                            
-                            connection.close();
-                        }
-                    }
+                    
                     
                     if (request.getParameter("submitBid") != null){
                         // --- Check that user is logged in --- //
@@ -145,7 +111,7 @@
                         if(rs.next()) {       
                             out.print("<h4>Price per item: $");
                             out.print(rs.getString("price") + " ");
-                            out.print("<form name=\"buyItem\" method=\"POST\" action=\"item.jsp?itemID="
+                            out.print("<form name=\"buyItem\" method=\"POST\" action=\"confirmBuyItem.jsp?itemID="
                                     + request.getParameter("itemID")
                                     + "\" onsubmit=\"return validate_buy();\">");
                             out.print("<input type=\"hidden\" name=\"email\" value=\""
@@ -204,7 +170,23 @@
             
         <script type="text/javascript">
             function validate_buy(){
-                document.bidOnItem.submit();
+                var qty = document.buyItem.quantity.value;
+                
+                if (parseInt(qty) < 0){
+                    alert("Quantity cannot be negative");
+                    return false;
+                }
+                else if (parseInt(qty) < 1) {
+                    alert("Quantity cannot be 0");
+                    return false;
+                }
+                else if (qty == "") {
+                    alert("No quantity entered");
+                    return false;
+                }
+                else {
+                    document.bidOnItem.submit();
+                }
             }
             
             function validate_bid(){

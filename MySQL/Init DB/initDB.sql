@@ -135,9 +135,12 @@ CREATE TABLE PurchaseHistory(
     date DATETIME,
     quantity INTEGER,
 	pricePaid REAL,
+    cardUsed CHAR(19),
+    shipAddr CHAR(112),
     PRIMARY KEY(email,itemID,date),
     FOREIGN KEY (itemID) REFERENCES Items (itemID),
-    FOREIGN KEY (email) REFERENCES Users (email)
+    FOREIGN KEY (email) REFERENCES Users (email),
+    FOREIGN KEY (cardUsed) REFERENCES CCPayment (number)
 );
 
 CREATE TABLE Rating( 
