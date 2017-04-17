@@ -123,6 +123,7 @@ CREATE TABLE BiddingMethod(
 	min_bid REAL, 
 	current_bid REAL, 
     current_bidder VARCHAR(100),
+    end_date DATE,
 	PRIMARY KEY(itemID), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID) 
 		ON DELETE CASCADE ,
