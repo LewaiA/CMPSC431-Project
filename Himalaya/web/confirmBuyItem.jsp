@@ -105,6 +105,8 @@
                                     + total
                                     + ")\">");
                             out.print("</form>");
+                            
+                            connection.close();
                         }
 
                         if (request.getParameter("confirmBuyItem") != null){

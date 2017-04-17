@@ -1,3 +1,11 @@
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,18 +20,41 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-    <!-- Load navigation bar -->
+        <!-- Load navigation bar -->
         <div id="navbar"></div>
         <script>
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
         </script> 
-    <!-- End load navigation bar -->
-    
-    <div class="translucentDiv">
-        <h1 align="center">Sale Report</h1>
-    </div>
+        <!-- End load navigation bar -->
         
+        <div class="translucentDiv">
+            <h1 align="center">Sale Report</h1>
+            
+            <%
+                try{
+                    InitialContext initialContext = new InitialContext();
+                    Context context = (Context) initialContext.lookup("java:comp/env");
+                    //The JDBC Data source that we just created
+                    DataSource ds = (DataSource) context.lookup("himalaya");
+                    Connection connection = ds.getConnection();
+
+                    if (connection == null)
+                    {
+                        throw new SQLException("Error establishing connection!");
+                    }
+                    
+                    
+                    
+                    connection.close();
+                }
+                catch (Exception e){
+                    out.println("<h1>An error occurred<h1>");
+                    out.println("Error: " + e.getMessage());
+                }
+            %>
+            
+        </div>
     </body>
 </html>
