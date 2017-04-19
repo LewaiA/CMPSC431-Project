@@ -17,6 +17,8 @@
             <ul class="nav navbar-nav">
                 <li class=""><a href="allitems.jsp">All Items</a></li>
                 <li class=""><a href="browseItems.jsp">Browse</a></li>
+                <li class=""><a href="addItem.html">Sell</a></li>
+                </li>
             </ul>
             <%-- Search Bar --%>
             <form class="navbar-form navbar-left" role="search" action="searchResults.jsp">
@@ -30,11 +32,11 @@
                 </div>
             </form>
             <%-- Search Bar end --%>
-            
+
             <form class="navbar-form navbar-right" role="form">
                 <%
                     if(request.getSession().getAttribute("email") != null){
-                        out.println("<span style=\"color:white;\">Hello, " + 
+                        out.println("<span style=\"color:white;\">Hello, " +
                             request.getSession().getAttribute("name") +
                             "</span>"); %>
                             <a class="btn btn-default glyphicon glyphicon-cog" href="manageAccount.jsp"></a>
@@ -43,7 +45,7 @@
                     else { %>
                         <a class="btn btn-success" href="login.html">Sign In</a>
                         <a class="btn btn-default" href="newUser.html">Register</a>
-                    <% } 
+                    <% }
                 %>
             </form>
         </div>
