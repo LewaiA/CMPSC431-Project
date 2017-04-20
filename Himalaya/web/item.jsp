@@ -88,10 +88,7 @@
                             connection.close();
                         }
                         
-                        request.getParameter("itemID");
                     }
-                    
-                    request.getParameter("itemID");
 
                     if (request.getParameter("itemID") != null){
                         InitialContext initialContext = new InitialContext();
