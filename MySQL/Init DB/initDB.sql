@@ -149,7 +149,7 @@ CREATE TABLE Rating(
 	itemID INTEGER NOT NULL,  
 	stars INTEGER,  
 	review VARCHAR(500),  
-	PRIMARY KEY(stars, itemID, email), 
+	PRIMARY KEY(itemID, email), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID)  
 		ON DELETE CASCADE, 
 	FOREIGN KEY(email) REFERENCES Users (email)
