@@ -104,7 +104,7 @@ CREATE TABLE TreatYoSelf(
 	email VARCHAR(100) NOT NULL,  
 	budget REAL,  
 	CID INTEGER, 
-	PRIMARY KEY(email, budget), 
+	PRIMARY KEY(email), 
 	FOREIGN KEY(email) REFERENCES Users (email) 
 		ON DELETE CASCADE, 
 	FOREIGN KEY(CID) REFERENCES Category (CID)
