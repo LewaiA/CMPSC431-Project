@@ -39,7 +39,7 @@
                         out.println("<span style=\"color:white;\">Hello, " +
                             request.getSession().getAttribute("name") +
                             "</span>"); %>
-                            <a class="btn btn-default glyphicon glyphicon-cog" href="manageAccount.jsp"></a>
+                        <a class="btn btn-default glyphicon glyphicon-cog" href="manageAccount.jsp"></a>
                         <a class="btn btn-default" href="logout.jsp">Log Out</a>
                     <% }
                     else { %>

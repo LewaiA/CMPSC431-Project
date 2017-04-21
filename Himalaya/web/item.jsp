@@ -36,7 +36,7 @@
             <%
                 try {
                     
-                    
+                    // --- Submit bid --- //
                     if (request.getParameter("submitBid") != null){
                         // --- Check that user is logged in --- //
                         if (request.getSession().getAttribute("email") == null){
@@ -90,6 +90,7 @@
                         
                     }
 
+                    // --- Get item info --- //
                     if (request.getParameter("itemID") != null){
                         InitialContext initialContext = new InitialContext();
                         Context context = (Context) initialContext.lookup("java:comp/env");
@@ -200,29 +201,39 @@
 
                         // --- Leave item rating --- //
                         if (request.getSession().getAttribute("email") != null){
+                            
+                            // --- Leave rating on only items bought --- //
                             preparedStmt = connection.prepareStatement(
-                                    "SELECT * FROM Rating WHERE itemID=? AND email=?");
+                                    "SELECT * FROM PurchaseHistory WHERE itemID=? AND email=?");
                             preparedStmt.setString(1, request.getParameter("itemID"));
                             preparedStmt.setString(2, request.getSession().getAttribute("email").toString());
                             rs = preparedStmt.executeQuery();
 
-                            if (rs.next() == false){
-                                out.println("<form name=\"leaveRating\" method=\"POST\" action=\"item.jsp?itemID="
-                                        + request.getParameter("itemID")
-                                        + "\" onsubmit=\"return validate_rating();\">"); 
-                                %>
-                                <h4>Rate number of peaks: </h4>
-                                    <select class="form-control" name="stars" placeholder="Peaks (1-5)">
-                                        <option value="1">^</option>
-                                        <option value="2">^^</option>
-                                        <option value="3">^^^</option>
-                                        <option value="4">^^^^</option>
-                                        <option value="5">^^^^^</option>
-                                    </select>
-                                    <textarea type="text" class="form-control" style="vertical-align:top;" name="review" placeholder="Review (optional)"></textarea>
-                                    <input type="submit" name="submitRating" class="btn btn-default" value="Leave rating">
-                                </form>     
-                                <%
+                            if (rs.next()) {
+                                preparedStmt = connection.prepareStatement(
+                                        "SELECT * FROM Rating WHERE itemID=? AND email=?");
+                                preparedStmt.setString(1, request.getParameter("itemID"));
+                                preparedStmt.setString(2, request.getSession().getAttribute("email").toString());
+                                rs = preparedStmt.executeQuery();
+
+                                if (rs.next() == false){
+                                    out.println("<form name=\"leaveRating\" method=\"POST\" action=\"item.jsp?itemID="
+                                            + request.getParameter("itemID")
+                                            + "\" onsubmit=\"return validate_rating();\">"); 
+                                    %>
+                                    <h4>Rate number of peaks: </h4>
+                                        <select class="form-control" name="stars" placeholder="Peaks (1-5)">
+                                            <option value="1">^</option>
+                                            <option value="2">^^</option>
+                                            <option value="3">^^^</option>
+                                            <option value="4">^^^^</option>
+                                            <option value="5">^^^^^</option>
+                                        </select>
+                                        <textarea type="text" class="form-control" style="vertical-align:top;" name="review" placeholder="Review (optional)"></textarea>
+                                        <input type="submit" name="submitRating" class="btn btn-default" value="Leave rating">
+                                    </form>     
+                                    <%
+                                }
                             }
                         }
 
