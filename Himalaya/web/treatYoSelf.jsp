@@ -38,7 +38,50 @@
 
                     // --- Submit TYS form --- //
                     if (request.getParameter("submitTYS") != null){
+                        InitialContext initialContext = new InitialContext();
+                        Context context = (Context) initialContext.lookup("java:comp/env");
+                        //The JDBC Data source that we just created
+                        DataSource ds = (DataSource) context.lookup("himalaya");
+                        Connection connection = ds.getConnection();
 
+                        if (connection == null)
+                        {
+                            throw new SQLException("Error establishing connection!");
+                        }
+
+                        // --- Check that user is enrolled in TYS --- //
+                        PreparedStatement preparedStmt = connection.prepareStatement(
+                                "INSERT INTO TreatYoSelf (email, budget, CID) VALUES (?,?,?)");
+                        preparedStmt.setString(1, request.getSession().getAttribute("email").toString());
+                        preparedStmt.setString(2, request.getParameter("budget"));
+                        preparedStmt.setString(3, request.getParameter("CID"));
+                        
+                        preparedStmt.executeUpdate();
+                        
+                        connection.close();
+                    }
+                    
+                    // --- Unsubscribe from TYS --- //
+                    if (request.getParameter("unsubscribeTYS") != null){
+                        InitialContext initialContext = new InitialContext();
+                        Context context = (Context) initialContext.lookup("java:comp/env");
+                        //The JDBC Data source that we just created
+                        DataSource ds = (DataSource) context.lookup("himalaya");
+                        Connection connection = ds.getConnection();
+
+                        if (connection == null)
+                        {
+                            throw new SQLException("Error establishing connection!");
+                        }
+
+                        // --- Check that user is enrolled in TYS --- //
+                        PreparedStatement preparedStmt = connection.prepareStatement(
+                                "DELETE FROM TreatYoSelf WHERE email=?");
+                        preparedStmt.setString(1, request.getSession().getAttribute("email").toString());
+                        
+                        preparedStmt.executeUpdate();
+                        
+                        connection.close();
                     }
 
                     // --- Check that user's logged in --- //
@@ -65,8 +108,16 @@
 
                         if (rs.next()){     // user has signed up
                             rs.beforeFirst();
-
-
+                            %>
+                            <h4 style="padding-left:50px;padding-right:50px" align="center">
+                                You're signed up to Treat Yo' Self. Click below to unsubscribe.
+                            </h4>
+                            <form align="center" name="unsubscribeTYS" method="POST" action="treatYoSelf.jsp">
+                                <input class="btn btn-danger" type="submit" value="Unsubscribe" name="unsubscribeTYS">
+                            </form>
+                            <%
+                            
+                                
                         }
                         else {      // user hasn't signed up
                             %>
@@ -84,11 +135,31 @@
                                 <table align = "center" border="0">
                                     <tr>
                                         <td>Budget (per month)</td>
-                                        <td><input required class="form-control" type="range" name="budget"></td>
+                                        <td align="center">
+                                            <input required class="form-control" type="range" name="budget" id="budgetInputId" value="50" min="5" max="100" oninput="budgetOutputId.value = budgetInputId.value">
+                                            $<output style="display:inline;" name="budgetOutput" id="budgetOutputId">50</output>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Preferred item category</td>
-                                        <td><input required class="form-control" type="text" name="CID"></td>
+                                        <td>
+                                            <select class="form-control" name="CID">
+                                                <%
+                                                preparedStmt = connection.prepareStatement(
+                                                        "SELECT * FROM Category");
+                                                rs = preparedStmt.executeQuery();
+                                                
+                                                while(rs.next()){
+                                                    out.println("<option value=\""
+                                                            + rs.getString("CID")
+                                                            + "\">"
+                                                            + rs.getString("CNAME")
+                                                            + "</option>"
+                                                    );
+                                                }
+                                                %>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td></td>
