@@ -78,7 +78,6 @@
                             + rs.getString("itemID")
                             + "</td>");
                         
-                        Integer minBid, curBid;
                         if (rs.getString("min_bid") != null && rs.getString("current_bid") != null
                                 && Integer.parseInt(rs.getString("min_bid")) <= Integer.parseInt(rs.getString("current_bid"))){
                             
@@ -114,6 +113,12 @@
                             } else {
                                 preparedStmt.setString(7, null);
                             }
+                            
+                            // deactivate auction
+                            preparedStmt = connection.prepareStatement(
+                                    "UPDATE BiddingMethod SET active=false WHERE itemID=?");
+                            preparedStmt.setString(1, rs.getString("itemID"));
+                            
                             
                             preparedStmt.executeUpdate();
                             

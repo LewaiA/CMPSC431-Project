@@ -113,18 +113,17 @@
                             out.println(rs.getString("name"));
                             out.println("</h1>");
 
-                            out.println("<h4>Quantity available: ");
-                            out.println(rs.getString("qty"));
+                            out.println("<h4>Quantity available: "
+                                    + rs.getString("qty")
+                                    + "&nbsp;&nbsp;&nbsp;");
+                            
+                            out.println("Seller URL: ");
+                            out.println("<a href=\"" + rs.getString("url") + "\">" + rs.getString("url") + "</a>");
                             out.println("</h4>");
 
                             out.println("<h4>Description: ");
                             out.println(rs.getString("description"));
                             out.println("</h4>");
-
-                            out.println("<h4>Seller URL: ");
-                            out.println(rs.getString("url"));
-                            out.println("</h4>");
-
                         }
                         else {
                            out.println("<h1>An error occurred</h1>");
@@ -150,8 +149,7 @@
                         preparedStmt.setString(1, request.getParameter("itemID"));
                         rs = preparedStmt.executeQuery();                        
                         if(rs.next()) {       
-                            out.println("<h4>Price per item: $");
-                            out.println(rs.getString("price") + " ");
+                            out.println("<h4>Price per item: $" + rs.getString("price") + " ");
                             out.println("<form name=\"buyItem\" method=\"POST\" action=\"confirmBuyItem.jsp?itemID="
                                     + request.getParameter("itemID")
                                     + "\" onsubmit=\"return validate_buy();\">");
@@ -173,8 +171,7 @@
                         preparedStmt.setString(1, request.getParameter("itemID"));
                         rs = preparedStmt.executeQuery();                        
                         if(rs.next()) {       
-                            out.println("<h4>Current bid: $");
-                            out.println(rs.getString("current_bid") + " ");
+                            out.println("<h4>Current bid: $" + rs.getString("current_bid") + " ");
                             out.println("&nbsp;Current bidder: ");
                             out.println(rs.getString("current_bidder"));
                             
@@ -191,11 +188,21 @@
                             out.println("<input type=\"hidden\" name=\"minBid\" value=\""
                                     + rs.getString("min_bid")
                                     + "\">");
-                            %>        
-                                <input type="number" name="newBid" placeholder="Enter new bid">
-                                <input type="submit" name="submitBid" class="btn btn-default" value="Place bid">
-                            </form>
-                            <%
+                            
+                            if (rs.getBoolean("active")){
+                                %>        
+                                    <input type="number" name="newBid" placeholder="Enter new bid">
+                                    <input type="submit" name="submitBid" class="btn btn-default" value="Place bid">
+                                </form>
+                                <%
+                            }
+                            else{
+                                %>
+                                    <input disabled type="number" name="newBid" placeholder="This auction isn't active">
+                                    <input disabled type="submit" name="submitBid" class="btn btn-default" value="Place bid">
+                                </form>
+                                <%
+                            }
                             out.println("</h4>");
                         }
 
