@@ -48,7 +48,7 @@
                     }
                     
                     PreparedStatement preparedStmt = connection.prepareStatement(
-                            "SELECT * FROM BiddingMethod WHERE end_date >= ? AND end_date <= ?");
+                            "SELECT * FROM BiddingMethod B,Items I WHERE end_date >= ? AND end_date <= ? AND B.itemID=I.itemID");
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                     java.util.Date now = new java.util.Date();
                     String dateBegin = format.format(now) + " 00:00:00";
@@ -62,7 +62,8 @@
                     <table class="sortable table" align="center" border="0">
                         <tr style="font-weight:bold">
                             <td>Email</td>
-                            <td>itemId</td>
+                            <td>Item ID</td>
+                            <td>Item Name</td>
                             <td>Sold?</td>
                             <td>Price Paid</td>
                         </tr>
@@ -76,6 +77,9 @@
                             + "</td>");
                         out.print("<td>"
                             + rs.getString("itemID")
+                            + "</td>");
+                        out.print("<td>"
+                            + rs.getString("name")
                             + "</td>");
                         
                         if (rs.getString("min_bid") != null && rs.getString("current_bid") != null
@@ -137,7 +141,7 @@
                             
                         }
                         
-                        out.print("<td>"
+                        out.print("<td>$"
                             + rs.getString("current_bid")
                             + "</td>");
                         
