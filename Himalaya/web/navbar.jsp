@@ -21,9 +21,9 @@
                 </li>
             </ul>
             <%-- Search Bar --%>
-            <form class="navbar-form navbar-left" role="search" action="searchResults.jsp">
+            <form class="navbar-form navbar-left" role="search" method="POST" action="searchResults.jsp">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <input type="text" class="form-control" name="search" placeholder="Search for Items...">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <i class="glyphicon glyphicon-search"></i>

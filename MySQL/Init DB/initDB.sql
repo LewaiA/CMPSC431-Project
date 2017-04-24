@@ -55,10 +55,11 @@ CREATE TABLE Category(
 );
 
 CREATE TABLE Items(
-	itemID INTEGER, 
+	itemID INTEGER AUTO_INCREMENT, 
     name VARCHAR(100),
     description VARCHAR(500),
-    url VARCHAR(255),
+    seller_url VARCHAR(255),
+    img_url VARCHAR(255),
 	qty INTEGER, 
 	CID INTEGER NOT NULL, 
 	PRIMARY KEY(itemID), 

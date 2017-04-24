@@ -34,12 +34,23 @@
                   <td><input required type="text" name="name"></td>
               </tr>
               <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
                   <td>Item Description</td>
-                  <td><input required type="text" name="description"></td>
+                  <td><textarea required rows="4" columns="8" name="description"></textarea></td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Your website</td>
+                <td>
+                  <input required type="url" name="seller_url"></td>
               </tr>
               <tr>
                   <td>image URL</td>
-                  <td><input required type="url" name="url"></td>
+                  <td><input required type="url" name="img_url"></td>
               </tr>
               <tr>
                   <td>Quantity available</td>
@@ -50,20 +61,51 @@
                 <td><input required type="number" name="CID"></td>
               </tr>
               <tr>
-                  <td>Direct Sale Price</td>
-                  <td><input required type="number" name="price" ></td>
+                  <td>&nbsp;</td>
               </tr>
               <tr>
-                  <td>Bid Start Price</td>
-                  <td><input required type="number" name="min_bid" ></td>
+                  <td><input type="checkbox" name="dsale" onclick="dsalechck()"/> Direct Sale</td>
+
+              </tr>
+              <script>
+              function dsalechck(){
+                    if(document.getElementsByName("dsale")[0].checked == true){
+                        document.getElementsByName("price")[0].disabled=false;
+                    }
+                    else{
+                        document.getElementsByName("price")[0].disabled=true;
+                    }
+               }
+               function bsalechck(){
+                   if(document.getElementsByName("bsale")[0].checked == true){
+                        document.getElementsByName("min_bid")[0].disabled=false;
+                        document.getElementsByName("end_date")[0].disabled=false;
+                    }
+                    else{
+                        document.getElementsByName("min_bid")[0].disabled=true;
+                        document.getElementsByName("end_date")[0].disabled=true;
+                    }
+                }
+              </script>
+              <tr>
+                  <td>Direct Sale Price</td>
+                  <td><input required type="number" name="price" disabled></td>
               </tr>
               <tr>
                   <td>&nbsp;</td>
               </tr>
-              <tr align="center">
-                  <td><input required type="checkbox" name="dsale"> Direct Sale</td>
-                  <td><input required type="checkbox" name="bsale"> Bid</td>
+              <tr>
+                      <td><input type="checkbox" name="bsale" onclick="bsalechck()"/> Bid</td>
               </tr>
+              <tr>
+                  <td>Bid Start Price</td>
+                  <td><input required type="number" name="min_bid" disabled></td>
+              </tr>
+              <tr>
+                  <td>End bid date</td>
+                  <td><input required type="date" id="end_date" name="end_date" disabled></td>
+              </tr>
+
               <tr>
                   <td></td>
                 <td align = "right">
@@ -76,7 +118,21 @@
         </div>
         <script type="text/javascript">
             function validate_form(){
-                document.addItem.submit();
+                if (document.addItem.name.value.length > 100){
+                    alert("Item Name is Limited to 100 Characters");
+                    return false;
+                }
+                else if(document.addItem.qty.value <= 0){
+                    alert("Item Quantity cannot be 0 or less");
+                    return false;
+                }
+                else if(document.addItem.min_bid.disabled == false && document.addItem.min_bid.value <= 0){
+                    alert("Item minimum bid cannot be a price of 0 or less");
+                    return false;
+                }
+                else{
+                    document.addItem.submit();
+                }
             }
 
         </script>

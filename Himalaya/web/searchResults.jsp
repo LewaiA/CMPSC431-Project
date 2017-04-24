@@ -1,3 +1,14 @@
+<%@page import="java.sql.Statement"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Enumeration"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,12 +29,46 @@
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
     <!-- End load navigation bar -->
-    
+
     <div class="translucentDiv">
         <h1 align="center">Search results</h1>
+        <%
+        try{
+          InitialContext initialContext = new InitialContext();
+          Context context = (Context) initialContext.lookup("java:comp/env");
+          //The JDBC Data source that we just created
+          DataSource ds = (DataSource) context.lookup("himalaya");
+          Connection connection = ds.getConnection();
+
+          if(connection == null){
+            throw new SQLException("Error establishing connection!");
+          }
+
+          PreparedStatement searchResults = connection.prepareStatement("SELECT * FROM Items WHERE name = ?");
+          searchResults.setString(1, request.getParameter("search"));
+
+          ResultSet rs = searchResults.executeQuery();
+
+          while (rs.next())
+          {
+              out.print("<a href=\"item.jsp?itemID="+
+                      rs.getString("itemID")
+                      +"\">");
+              out.print(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+              out.println("</a>");
+          }
+
+          connection.close();
+        }
+
+        catch (Exception e){
+            out.println("<h1>An error occurred<h1>");
+            out.println("Error: " + e.getMessage());
+        }
+        %>
     </div>
-        
+
     </body>
 </html>

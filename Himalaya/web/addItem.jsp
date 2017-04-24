@@ -49,36 +49,72 @@
                 DataSource ds = (DataSource) context.lookup("himalaya");
                 Connection connection = ds.getConnection();
                 //create query to pull itemID out from database
-                Statement statement=null;
+                // Statement statement=null;
 
-                ResultSet rs= null;
-                statement = connection.createStatement();
-                statement.executeUpdate("UPDATE item_list list SET list.id= list.id+1");
+                // ResultSet rs= null;
+                // statement = connection.createStatement();
+                // statement.executeUpdate("UPDATE item_list list SET list.id= list.id+1");
 
-                rs = statement.executeQuery("SELECT list.id FROM item_list list");
+                // rs = statement.executeQuery("SELECT list.id FROM item_list list");
 
-                while(rs.next()){
-                    itemId = rs.getInt("id");
-                }
-
+                // while(rs.next()){
+                    // itemId = rs.getInt("id");
+                // }
+                int itemID=0;
                 if (connection == null){
                     throw new SQLException("Error establishing connection!");
                 }
 
-                PreparedStatement preparedStmt = connection.prepareStatement("INSERT INTO Items(itemID, name, description, url, qty, CID)"
-                + "VALUES(?, ?, ?, ?, ?, ?)");
+                PreparedStatement preparedStmt = connection.prepareStatement("INSERT INTO Items(name, description, seller_url, img_url, qty, CID)"
+                + "VALUES(?, ?, ?, ?, ?, ?)", new String[]{"itemID"});
                 //create the mysql insert PreparedStatement
-                preparedStmt.setInt(1, itemId);
-                preparedStmt.setString(2, request.getParameter("name"));
-                preparedStmt.setString(3, request.getParameter("description"));
-                preparedStmt.setString(4, request.getParameter("url"));
+                // preparedStmt.setInt(1, itemId);
+                preparedStmt.setString(1, request.getParameter("name"));
+                preparedStmt.setString(2, request.getParameter("description"));
+                preparedStmt.setString(3, request.getParameter("seller_url"));
+                preparedStmt.setString(4, request.getParameter("img_url"));
                 preparedStmt.setInt(5, Integer.parseInt(request.getParameter("qty")));
                 preparedStmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
 
                 //execute the preparedstatement
                 preparedStmt.execute();
+                //get generated itemID
+                try (ResultSet generatedKeys = preparedStmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        itemID = generatedKeys.getInt(1);
+                    }
+                    else {
+                        throw new SQLException("<h1>Creating user failed, no ID obtained.</h1>");
+                    }
+                }
 
-                out.println("<h1>Item successfully added for sale</h1>");
+                String DirectSale = request.getParameter("dsale");
+                if(DirectSale !=null){
+                    //prepare statement to input into Direct Sale
+                    PreparedStatement dSaleStmt = connection.prepareStatement("INSERT INTO DsaleMethod(itemID, price) VALUES(?,?)");
+                    dSaleStmt.setInt(1, itemID);
+                    dSaleStmt.setInt(2, Integer.parseInt(request.getParameter("price")));
+
+                    dSaleStmt.execute();
+                    //End Direct Sale
+                }
+                String BiddingSale= request.getParameter("bsale");
+                if(BiddingSale !=null){
+                    //prepare statement to input into Bidding Sale
+                    PreparedStatement bSaleStmt = connection.prepareStatement("INSERT INTO BiddingMethod(itemID, min_bid, current_bid, current_bidder, end_date, active)"
+                    + "VALUES(?,?, NULL, NULL, ?, true)");
+                    bSaleStmt.setInt(1, itemID);
+                    bSaleStmt.setInt(2, Integer.parseInt(request.getParameter("min_bid")));
+
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date end_date = format.parse(request.getParameter("end_date"));
+                    bSaleStmt.setDate(3, new java.sql.Date(end_date.getTime()));
+
+                    bSaleStmt.execute();
+
+                    //end Bidding Sale
+                }
+                out.println("<h1>Item successfully added for sale" + "ItemID= " + itemID+ "</h1>");
                 connection.close();
               }
             }

@@ -1,0 +1,121 @@
+
+01,00,Mobile Phones
+111,01,Phones
+112,01,Cases
+113,01,Other Accessories
+121,01,Apple
+122,01,Android
+123,01,Complete Care
+124,01,Fresh LOOK
+125,01,Earbuds
+126,01,Running Sleeves
+131,01,Samsung
+132,01,Google
+133,01,Other
+134,01,Designer
+*****************************************************************
+02,00,Stamps
+211,02,20st Century
+212,02,21st Century
+221,02,Decades
+222,02,Holiday
+223,02,Presidential
+******************************************************************
+03,00,Home&Graden
+311,03,Homecare
+312,03,Furniture
+313,03,Landscape
+321,03,Detergent & Soaps
+322,03,Brooms & Mops
+323,03,Outdoor
+324,03,Indoor
+325,03,Fertilizer
+326,03,Plant Seeds
+*****************************************************************
+04,00,Books
+411,04,Physical
+412,04,Digital
+413,04,Accessories
+421,04,Hardcover
+422,04,Softcover
+423,04,Ebook
+424,04,Audio
+425,04,Bookmarks
+426,04,Reading Assistants
+*******************************************************************
+05,00,Electronics
+511,05,Speakers
+512,05,Televisions
+513,05,Computers&Tablets
+514,05,Internet/Networks
+521,05,Bluetooth
+522,05,Wired
+523,05,LCD
+524,05,LED
+525,05,Desktops
+526,05,Laptops&Tablets
+527,05,Router&Modems
+531,05,Dell
+532,05,Acer
+533,05,Apple
+534,05,Microsoft
+**************************************************************************
+06,00,Pet Supplies
+611,06,Dog Supplies
+612,06,Bird Supplies
+621,06,Dog Food
+622,06,Dog Toys
+623,06,Cages
+631,06,Organic
+632,06,Bouncy
+633,06,Vision Bird Cages
+*****************************************************************************
+07,00,Video Games&Consoles
+711,07,Video Game Consoles
+712,07,Video Games
+721,07,Sony Playstation4
+722,07,Xbox One
+723,07,Download
+724,07,Disc
+731,07,Slim
+732,07,Pro
+733,07,Scorpio
+734,07,New
+735,07,Used
+*******************************************************************
+08,00,Clothing,Shoes,&Accessories
+811,08,Men's Clothing
+812,08,Women's Clothing
+813,08,Accessories
+821,08,Men's Coats&Jackets
+822,08,Suits
+823,08,Dresses
+824,08,Shirts&Pants
+825,08,Watches&Belts
+826,08,Hats&Shoes
+********************************************************************
+09,00,Coins&Paper Money
+911,09,Ancient Coins
+912,09,Modern Coins
+921,09,Precious Metals
+922,09,Replicas
+*******************************************************************
+10,00,Sports Memorabilia
+1011,10,Jerseys
+1012,10,Sports Balls
+1021,10,Signed
+1022,10,Unsigned
+1023,10,League Official
+1024,10,Encased&Signed
+**********************************************************************
+11,00,Automobiles
+1111,11,Cars&Motorcycles
+1112,11,Accessories&Parts
+1121,11,New
+1122,11,Used
+1123,11,Tires
+1124,11,MotorOil
+1123,11,Tools
+***************************************************************************
+
+
