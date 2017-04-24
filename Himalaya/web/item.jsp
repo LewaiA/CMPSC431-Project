@@ -112,13 +112,17 @@
                             out.println("<h1>");
                             out.println(rs.getString("name"));
                             out.println("</h1>");
+                            
+                            out.println("<img src=\""
+                                    + rs.getString("img_url")
+                                    + "\">&nbsp;&nbsp;&nbsp;");
 
                             out.println("<h4>Quantity available: "
                                     + rs.getString("qty")
                                     + "&nbsp;&nbsp;&nbsp;");
                             
                             out.println("Seller URL: ");
-                            out.println("<a href=\"" + rs.getString("url") + "\">" + rs.getString("url") + "</a>");
+                            out.println("<a href=\"" + rs.getString("seller_url") + "\">" + rs.getString("seller_url") + "</a>");
                             out.println("</h4>");
 
                             out.println("<h4>Description: ");
