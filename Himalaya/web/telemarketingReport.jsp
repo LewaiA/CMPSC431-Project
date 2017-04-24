@@ -23,6 +23,20 @@
     
     <div class="translucentDiv">
         <h1 align="center">Telemarketing Report</h1>
+        <table align="center" border="1px solid black" width="100%">
+            <tr>
+                <th>Name</th> 
+                <th>Address</th> 
+                <th>E-mail</th> <th>Phone</th> 
+                <th>Age</th> 
+                <th>Gender</th> 
+                <th>Annual Income</th> 
+                <th># of Bid Activities</th>
+            </tr>
+            <tr>
+                
+            </tr>
+        </table>
     </div>
         
     </body>
