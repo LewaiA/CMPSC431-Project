@@ -113,7 +113,7 @@
                             out.println(rs.getString("name"));
                             out.println("</h1>");
                             
-                            out.println("<img style=\"max-width:100%;\" src=\""
+                            out.println("<img style=\"max-width:75%;\" src=\""
                                     + rs.getString("img_url")
                                     + "\">&nbsp;&nbsp;&nbsp;");
 
