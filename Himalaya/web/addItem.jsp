@@ -78,6 +78,7 @@
                     while(rs.next()){
                         out.println("<option value=\""+ rs.getString("CID") + "\">" + rs.getString("CNAME") + "</option>");
                     }
+                    connection.close();
                     %>
                 </select>
                 </td>

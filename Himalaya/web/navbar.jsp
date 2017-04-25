@@ -47,6 +47,7 @@
                             out.println("<li value=\"" + rs.getString("CID")+ "\">" + "<a href=\"#\"> "  + rs.getString("CNAME") + "</a></li>");
                         }
 
+                        connection.close();
                     %>
                     </li>
                   </ul>
