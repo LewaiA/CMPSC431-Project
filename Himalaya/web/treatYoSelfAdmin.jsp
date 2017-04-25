@@ -48,7 +48,7 @@
                     }
 
                     PreparedStatement preparedStmt = connection.prepareStatement(
-                            "SELECT * FROM TreatYoSelf");
+                            "SELECT * FROM TreatYoSelf T, Category C WHERE T.CID=C.CID");
                     ResultSet rs = preparedStmt.executeQuery();
 
                     %>
@@ -57,7 +57,8 @@
                             <td>Email</td>
                             <td>Budget</td>
                             <td>Category Preference</td>
-                            <td>Chosen Item</td>
+                            <td>Chosen Item ID</td>
+                            <td>Chosen Item Name</td>
                             <td>Price</td>
                         </tr>
                     <%
@@ -74,9 +75,11 @@
                             + "</td>");
                         
                         out.print("<td>"
-                            + rs.getString("CID")
+                            + rs.getString("CNAME")
                             + "</td>");
-
+                        
+                        out.print(chooseItem(Integer.valueOf(rs.getString("CID")), 
+                                Integer.valueOf(rs.getString("budget")), rs.getString("email")));
 
                         out.print("</tr>");
                     }
@@ -93,3 +96,79 @@
         </div>
     </body>
 </html>
+
+<%!
+    public String chooseItem(Integer CID, Integer budget, String email) throws Exception
+    {
+        Connection connection = null;
+        try {
+            InitialContext initialContext = new InitialContext();
+            Context context = (Context) initialContext.lookup("java:comp/env");
+            //The JDBC Data source that we just created
+            DataSource ds = (DataSource) context.lookup("himalaya");
+            connection = ds.getConnection();
+
+            if (connection == null)
+            {
+                throw new SQLException("Error establishing connection!");
+            }
+
+            String output = "";
+            String chosenItemID = "-";
+            String chosenItemName = "No item found in budget";
+            String chosenItemPrice = " -";
+            
+            PreparedStatement preparedStmt = connection.prepareStatement(
+                    " SELECT * FROM Items I, DsaleMethod D WHERE I.itemID=D.itemID AND D.price<=? AND I.itemID NOT IN "
+                    + "(SELECT P.itemID FROM PurchaseHistory P WHERE P.email=?);");
+            preparedStmt.setInt(1, budget);
+            preparedStmt.setString(2, email);
+            ResultSet rs = preparedStmt.executeQuery();
+
+            if(rs.next()){
+                chosenItemID = rs.getString("itemID");
+                chosenItemName = rs.getString("name");
+                chosenItemPrice = rs.getString("price");
+
+                // --- Place buy --- //
+                preparedStmt = connection.prepareStatement(
+                        "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?, ?, ?)");
+                preparedStmt.setString(1, email);
+                preparedStmt.setString(2, rs.getString("itemID"));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                java.util.Date now = new java.util.Date();
+                String dateTime = format.format(now);
+                preparedStmt.setString(3, dateTime);
+                preparedStmt.setInt(4, 1);
+                preparedStmt.setString(5, rs.getString("price"));
+
+                PreparedStatement cardAndAddr = connection.prepareStatement(
+                            "SELECT * FROM CCPayment C, ShippingAddress S WHERE C.email=? AND C.email=S.email");
+                cardAndAddr.setString(1, email);
+                ResultSet cardAndAddrRs = cardAndAddr.executeQuery();
+                if (cardAndAddrRs.next()){
+                    preparedStmt.setString(6, cardAndAddrRs.getString("number"));
+                    preparedStmt.setString(7, cardAndAddrRs.getString("street") + " " + cardAndAddrRs.getString("city") 
+                            + " " + cardAndAddrRs.getString("state") + " " + cardAndAddrRs.getString("ZIP"));
+                }
+
+                preparedStmt.executeUpdate();
+                
+            } 
+            
+            output += "<td>" + chosenItemID + "</td>";
+            output += "<td>" + chosenItemName + "</td>";
+            output += "<td>$" + chosenItemPrice + "</td>";
+
+            connection.close();
+            return output;
+        }
+        catch(Exception e){
+
+            if (connection != null)
+                connection.close();
+
+            return e.toString();
+        }
+    }
+%>
