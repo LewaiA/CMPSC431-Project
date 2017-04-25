@@ -110,7 +110,8 @@
                             rs.beforeFirst();
                             %>
                             <h4 style="padding-left:50px;padding-right:50px" align="center">
-                                You're signed up to Treat Yo' Self. Click below to unsubscribe.
+                                You're signed up to Treat Yo' Self. You can sit back and relax now.<br/>
+                                Click below to unsubscribe.
                             </h4>
                             <form align="center" name="unsubscribeTYS" method="POST" action="treatYoSelf.jsp">
                                 <input class="btn btn-danger" type="submit" value="Unsubscribe" name="unsubscribeTYS">
