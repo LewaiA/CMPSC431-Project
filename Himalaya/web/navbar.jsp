@@ -1,3 +1,10 @@
+<%@page import="javax.naming.Context"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
 <!-- Navigation bar-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -17,7 +24,32 @@
             <ul class="nav navbar-nav">
                 <li class=""><a href="allitems.jsp">All Items</a></li>
                 <li class=""><a href="browseItems.jsp">Browse</a></li>
-                <li class=""><a href="addItem.html">Sell</a></li>
+                <li class=""><a href="addItem.jsp">Sell</a></li>
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <%
+                        InitialContext initialContext = new InitialContext();
+                        Context context = (Context) initialContext.lookup("java:comp/env");
+                        //The JDBC Data source that we just created
+                        DataSource ds = (DataSource) context.lookup("himalaya");
+                        Connection connection = ds.getConnection();
+
+                        if (connection == null)
+                        {
+                            throw new SQLException("Error establishing connection!");
+                        }
+
+                        PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM category WHERE pcid=0");
+                        ResultSet rs = preparedStmt.executeQuery();
+                        while(rs.next()){
+                            out.println("<li value=\"" + rs.getString("CID")+ "\">" + "<a href=\"#\"> "  + rs.getString("CNAME") + "</a></li>");
+                        }
+
+                    %>
+                    </li>
+                  </ul>
                 </li>
             </ul>
             <%-- Search Bar --%>

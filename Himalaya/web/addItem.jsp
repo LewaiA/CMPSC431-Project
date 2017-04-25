@@ -1,28 +1,21 @@
-<%--
-    Document : addItem.jsp
-    Create on : April 5, 2017
-    Author    : Lew-ayy
---%>
-
-<%@page import="java.sql.Statement"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.Enumeration"%>
 <%@page import="javax.naming.Context"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="javax.naming.InitialContext"%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
+<!--
+      Document   : additem.html
+      Created on : Apr 6, 2017, 10:10:10 PM
+      Author     : lew-ayyy
+-->
+
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Item</title>
-
+        <title>Add an Item to sell</title>
+        <meta charset="UTF-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,100 +23,153 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-    <!-- Load navigation bar -->
-        <div id="navbar"></div>
-        <script>
-            $.get("navbar.jsp", function(data){
-                $("#navbar").replaceWith(data);
-            });
-        </script>
-        <!-- End load navigation bar -->
-        <div align= "center" class="translucentDiv">
-          <%
-            int itemId=0;
-            try{
-              if(request.getParameter("submit") != null){
-                InitialContext initialContext = new InitialContext();
-                Context context = (Context) initialContext.lookup("java:comp/env");
-                //The JDBC Data source that we just created
-                DataSource ds = (DataSource) context.lookup("himalaya");
-                Connection connection = ds.getConnection();
-                //create query to pull itemID out from database
-                // Statement statement=null;
+         <!-- Load navigation bar  -->
+         <div id="navbar"></div>
+         <script>
+             $.get("navbar.jsp", function(data){
+                 $("#navbar").replaceWith(data);
+             });
+         </script>
+         <!--  End load navigation bar -->
 
-                // ResultSet rs= null;
-                // statement = connection.createStatement();
-                // statement.executeUpdate("UPDATE item_list list SET list.id= list.id+1");
-
-                // rs = statement.executeQuery("SELECT list.id FROM item_list list");
-
-                // while(rs.next()){
-                    // itemId = rs.getInt("id");
-                // }
-                int itemID=0;
-                if (connection == null){
-                    throw new SQLException("Error establishing connection!");
-                }
-
-                PreparedStatement preparedStmt = connection.prepareStatement("INSERT INTO Items(name, description, seller_url, img_url, qty, CID)"
-                + "VALUES(?, ?, ?, ?, ?, ?)", new String[]{"itemID"});
-                //create the mysql insert PreparedStatement
-                // preparedStmt.setInt(1, itemId);
-                preparedStmt.setString(1, request.getParameter("name"));
-                preparedStmt.setString(2, request.getParameter("description"));
-                preparedStmt.setString(3, request.getParameter("seller_url"));
-                preparedStmt.setString(4, request.getParameter("img_url"));
-                preparedStmt.setInt(5, Integer.parseInt(request.getParameter("qty")));
-                preparedStmt.setInt(6, Integer.parseInt(request.getParameter("CID")));
-
-                //execute the preparedstatement
-                preparedStmt.execute();
-                //get generated itemID
-                try (ResultSet generatedKeys = preparedStmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        itemID = generatedKeys.getInt(1);
+        <div class="translucentDiv">
+          <h1 align="center">Add an Item to sell</h1>
+          <form name="addItem" method="POST" action="prepareAddItem.jsp" onsubmit="return validate_form();">
+            <table align="center" border="0" width="300">
+              <tr>
+                  <td>Item Name</td>
+                  <td><input required type="text" name="name"></td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
+                  <td>Item Description</td>
+                  <td><textarea required rows="4" columns="8" name="description"></textarea></td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Your website</td>
+                <td>
+                  <input required type="url" name="seller_url"></td>
+              </tr>
+              <tr>
+                  <td>image URL</td>
+                  <td><input required type="url" name="img_url"></td>
+              </tr>
+              <tr>
+                  <td>Quantity available</td>
+                  <td><input required type="number" name="qty"></td>
+              </tr>
+              <tr>
+                <td>Category</td>
+                <td>
+                <select name="cid">
+                    <%
+                    InitialContext initialContext = new InitialContext();
+                    Context context = (Context) initialContext.lookup("java:comp/env");
+                    //The JDBC Data source that we just created
+                    DataSource ds = (DataSource) context.lookup("himalaya");
+                    Connection connection = ds.getConnection();
+                    PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM Category");
+                    ResultSet rs = preparedStmt.executeQuery();
+                    while(rs.next()){
+                        out.println("<option value=\""+ rs.getString("CID") + "\">" + rs.getString("CNAME") + "</option>");
                     }
-                    else {
-                        throw new SQLException("<h1>Creating user failed, no ID obtained.</h1>");
+                    %>
+                </select>
+                </td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
+                  <td><input type="checkbox" name="dsale" onclick="dsalechck()"/> Direct Sale</td>
+
+              </tr>
+              <script>
+              function dsalechck(){
+                    if(document.getElementsByName("dsale")[0].checked == true){
+                        document.getElementsByName("price")[0].disabled=false;
+                    }
+                    else{
+                        document.getElementsByName("price")[0].disabled=true;
+                    }
+               }
+               function bsalechck(){
+                   if(document.getElementsByName("bsale")[0].checked == true){
+                        document.getElementsByName("min_bid")[0].disabled=false;
+                        document.getElementsByName("end_date")[0].disabled=false;
+                    }
+                    else{
+                        document.getElementsByName("min_bid")[0].disabled=true;
+                        document.getElementsByName("end_date")[0].disabled=true;
                     }
                 }
+              </script>
+              <tr>
+                  <td>Direct Sale Price</td>
+                  <td><input required type="number" name="price" disabled></td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+              </tr>
+              <tr>
+                      <td><input type="checkbox" name="bsale" onclick="bsalechck()"/> Bid</td>
+              </tr>
+              <tr>
+                  <td>Bid Start Price</td>
+                  <td><input required type="number" name="min_bid" disabled></td>
+              </tr>
+              <tr>
+                  <td>End bid date</td>
+                  <td><input required type="date" id="end_date" name="end_date" disabled></td>
+              </tr>
 
-                String DirectSale = request.getParameter("dsale");
-                if(DirectSale !=null){
-                    //prepare statement to input into Direct Sale
-                    PreparedStatement dSaleStmt = connection.prepareStatement("INSERT INTO DsaleMethod(itemID, price) VALUES(?,?)");
-                    dSaleStmt.setInt(1, itemID);
-                    dSaleStmt.setInt(2, Integer.parseInt(request.getParameter("price")));
-
-                    dSaleStmt.execute();
-                    //End Direct Sale
-                }
-                String BiddingSale= request.getParameter("bsale");
-                if(BiddingSale !=null){
-                    //prepare statement to input into Bidding Sale
-                    PreparedStatement bSaleStmt = connection.prepareStatement("INSERT INTO BiddingMethod(itemID, min_bid, current_bid, current_bidder, end_date, active)"
-                    + "VALUES(?,?, NULL, NULL, ?, true)");
-                    bSaleStmt.setInt(1, itemID);
-                    bSaleStmt.setInt(2, Integer.parseInt(request.getParameter("min_bid")));
-
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    java.util.Date end_date = format.parse(request.getParameter("end_date"));
-                    bSaleStmt.setDate(3, new java.sql.Date(end_date.getTime()));
-
-                    bSaleStmt.execute();
-
-                    //end Bidding Sale
-                }
-                out.println("<h1>Item successfully added for sale" + "ItemID= " + itemID+ "</h1>");
-                connection.close();
-              }
-            }
-            catch (Exception e){
-                out.println("<h1>Adding Item Unsuccessful! Please re-check your entries and try again</h1>");
-                out.println("<h1>Error: " + e.getMessage()+"</h1>");
-            }
-            %>
-            <a class= "btn btn-default" href="index.jsp">Return to Home Page</a>
+              <tr>
+                  <td></td>
+                <td align = "right">
+                  <input class = "btn btn-default" type="submit" value= "Add Item to Sell" name="submit">
+                </td>
+              </tr>
+              <!-- Add description section, price, purchase method, shipping methods-->
+            </table>
+          </form>
         </div>
+        <script type="text/javascript">
+            function validate_form(){
+                if (document.addItem.name.value.length > 100){
+                    alert("Item Name is Limited to 100 Characters");
+                    return false;
+                }
+                else if(document.addItem.qty.value <= 0){
+                    alert("Item Quantity cannot be 0 or less");
+                    return false;
+                }
+                else if(document.addItem.cid.options[document.addItem.cid.selectedIndex].value == 0){
+                    alert("Please select a category");
+                    return false;
+                }
+                else if(document.addItem.dsale.checked == false && document.addItem.bsale.checked == false){
+                    alert("Please select either the Direct or Bidding sale methods");
+                    return false;
+                }
+                else if(document.addItem.price.disabled == false && document.addItem.price.value <= 0){
+                    alert("Item Price must be for more then 0");
+                    return false;
+                }
+                else if(document.addItem.min_bid.disabled == false && document.addItem.min_bid.value <= 0){
+                    alert("Item minimum bid cannot be a price of 0 or less");
+                    return false;
+                }
+                else{
+                    document.addItem.submit();
+                }
+            }
+
+        </script>
+
     </body>
 </html>
