@@ -35,7 +35,7 @@
         <div class="translucentDiv">
           <h1 align="center">Add an Item to sell</h1>
           <form name="addItem" method="POST" action="prepareAddItem.jsp" onsubmit="return validate_form();">
-            <table align="center" border="0" width="300">
+            <table align="center" border="0">
               <tr>
                   <td>Item Name</td>
                   <td><input class="form-control" required type="text" name="name"></td>
