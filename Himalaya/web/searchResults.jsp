@@ -41,16 +41,58 @@
           //The JDBC Data source that we just created
           DataSource ds = (DataSource) context.lookup("himalaya");
           Connection connection = ds.getConnection();
-
+          ResultSet rs = null;
           if(connection == null){
             throw new SQLException("Error establishing connection!");
           }
+          if(request.getParameter("search") !="" || request.getParameter("minimum_price") !="" || request.getParameter("maximum_price")!=""){
+              //create a prepare statement to search for keywords
+              String sql = "SELECT * FROM Items WHERE ";
+              String find_items="";
+              int c = 0;
+              //check if there was anything in the search box
+              if(request.getParameter("search")!= ""){
+                  sql+="name LIKE \'%"+request.getParameter("search")+"%\' OR description LIKE \'%"+request.getParameter("search")+"%\'";
+                  c++;
+              }
+              //check if user entered numbers in both minimum and maximum price sections
+              if(request.getParameter("minimum_price") != "" && request.getParameter("maximum_price") != ""){
+                  find_items="SELECT itemID FROM dsalemethod WHERE price BETWEEN "+ request.getParameter("minimum_price") +
+                  " AND " + request.getParameter("maximum_price");
+              }
+              //check if user entered numbers in just the minimum price
+              if(request.getParameter("minimum_price") != ""){
+                  find_items="SELECT itemID FROM dsalemethod WHERE price >= " + request.getParameter("minimum_price");
+              }
+              //check if user entered numbers in just the maximum price section
+              if(request.getParameter("maximum_price") != ""){
+                  find_items="SELECT itemID FROM dsalemethod WHERE price <= " + request.getParameter("maximum_price");
+              }
 
-          PreparedStatement searchResults = connection.prepareStatement("SELECT * FROM Items WHERE name = ?");
-          searchResults.setString(1, request.getParameter("search"));
+              if(request.getParameter("minimum_price") != "" || request.getParameter("maximum_price") != ""){
+                  PreparedStatement items = connection.prepareStatement(find_items);
+                  //THIIIIIIIIICCCCCCCCCCCCCCCCCCCC
+                  ResultSet thic = items.executeQuery();
 
-          ResultSet rs = searchResults.executeQuery();
+                  while(thic.next()){
+                      if(c==0){
+                          sql+= "itemID= " + thic.getString("itemID");
+                          c++;
+                      }
+                      sql+=" UNION SELECT * FROM items WHERE itemID = " + thic.getString("itemID");
+                  }
+              }
+              PreparedStatement searchResults = connection.prepareStatement(sql);
+              rs = searchResults.executeQuery();
+          }
+          else{
+              PreparedStatement statmnt = connection.prepareStatement("SELECT * FROM items");
+              rs = statmnt.executeQuery();
+          }
 
+          if(!rs.isBeforeFirst()){
+            out.print("<h1>No Items Found with your search. Try a different Search For better Luck! </h1>");
+          }
           while (rs.next())
           {
               out.print("<a href=\"item.jsp?itemID="+
@@ -61,14 +103,18 @@
           }
 
           connection.close();
-        }
 
+        }
         catch (Exception e){
-            out.println("<h1>An error occurred<h1>");
-            out.println("Error: " + e.getMessage());
+            out.println("<h1>An error occurred</h1>");
+            out.println("<h1>Please try search again with valid input</h1>");
+            out.println("<h1>Error: " + e.getMessage()+"</h1>");
         }
         %>
-    </div>
 
+    </div>
+    <div align="center">
+        <a class= "btn btn-default" href="index.jsp">Return to Home Page</a>
+    </div>
     </body>
 </html>

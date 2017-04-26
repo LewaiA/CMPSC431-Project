@@ -86,7 +86,16 @@
                     {
                         throw new SQLException("Error establishing connection!");
                     }
-
+                    //title the search results
+                    PreparedStatement title = connection.prepareStatement("SELECT CNAME FROM category WHERE CID=?");
+                    title.setString(1, request.getParameter("CID"));
+                    ResultSet titlepg = title.executeQuery();
+                    //better way of checking if there is any results returned from query without skipping any
+                    if(titlepg.isBeforeFirst()){
+                        while(titlepg.next()){
+                            out.println("<h1 align = \"center\">" + titlepg.getString("CNAME") +"</h1>");
+                        }
+                    }
                     // --- Get item information --- //
                     String sql = "";
                     List<String> statements = new ArrayList<String>();

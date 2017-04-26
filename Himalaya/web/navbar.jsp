@@ -48,9 +48,9 @@
 
                           connection.close();
                       %>
-                      </li>
                     </ul>
                   </li>
+                  <li>
             </ul>
             <%-- Search Bar --%>
             <form class="navbar-form navbar-left" role="search" method="POST" action="searchResults.jsp">
@@ -62,8 +62,20 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            <%-- </form> --%>
             <%-- Search Bar end --%>
+            <%-- <form class="navbar-form navbar-left" role="price_search" method="POST" action="searchResults.jsp"> --%>
+              <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group col-xs-3">
+                  <div class="input-group-addon">$</div>
+                  <input type="text" class="form-control" name="minimum_price" placeholder="Min Price">
+                </div>
+                <div class="input-group col-xs-3">
+                    <input type="text" class="form-control" name="maximum_price" placeholder="Max Price" >
+                </div>
+              <button type="submit" class="btn btn-primary">Find Price Range</button>
+            </form>
+
 
             <form class="navbar-form navbar-right" role="form">
                 <%
