@@ -38,14 +38,14 @@
             <table align="center" border="0" width="300">
               <tr>
                   <td>Item Name</td>
-                  <td><input required type="text" name="name"></td>
+                  <td><input class="form-control" required type="text" name="name"></td>
               </tr>
               <tr>
                   <td>&nbsp;</td>
               </tr>
               <tr>
                   <td>Item Description</td>
-                  <td><textarea required rows="4" columns="8" name="description"></textarea></td>
+                  <td><textarea class="form-control" required rows="4" columns="8" name="description"></textarea></td>
               </tr>
               <tr>
                   <td>&nbsp;</td>
@@ -53,20 +53,21 @@
               <tr>
                 <td>Your website</td>
                 <td>
-                  <input required type="url" name="seller_url"></td>
+                  <input required class="form-control" type="url" name="seller_url"></td>
               </tr>
               <tr>
                   <td>image URL</td>
-                  <td><input required type="url" name="img_url"></td>
+                  <td><input required class="form-control" type="url" name="img_url"></td>
               </tr>
               <tr>
                   <td>Quantity available</td>
-                  <td><input required type="number" name="qty"></td>
+                  <td><input required class="form-control" type="number" name="qty"></td>
               </tr>
               <tr>
                 <td>Category</td>
                 <td>
-                <select name="cid">
+                <select name="cid" class="form-control">
+                    <option value= 0>-Select a Category-</option>
                     <%
                     InitialContext initialContext = new InitialContext();
                     Context context = (Context) initialContext.lookup("java:comp/env");
@@ -112,7 +113,7 @@
               </script>
               <tr>
                   <td>Direct Sale Price</td>
-                  <td><input required type="number" name="price" disabled></td>
+                  <td><input required class="form-control" type="number" name="price" disabled></td>
               </tr>
               <tr>
                   <td>&nbsp;</td>
@@ -122,11 +123,11 @@
               </tr>
               <tr>
                   <td>Bid Start Price</td>
-                  <td><input required type="number" name="min_bid" disabled></td>
+                  <td><input class="form-control" required type="number" name="min_bid" disabled></td>
               </tr>
               <tr>
                   <td>End bid date</td>
-                  <td><input required type="date" id="end_date" name="end_date" disabled></td>
+                  <td><input required class="form-control" type="date" id="end_date" name="end_date" disabled></td>
               </tr>
 
               <tr>
