@@ -31,7 +31,8 @@
         </script> 
         <!-- End load navigation bar -->
     
-        <div class="translucentDiv">
+        <div align="center" class="translucentDiv">
+            <a href="treatYoSelf.jsp" class="btn btn-success">Treat Yo' Self Settings</a>
         <%
             try{
                 if (request.getParameter("submit") != null) {
@@ -135,7 +136,10 @@
                     <tr>
                         <td>Email</td>
                         <td>
-                            <%out.println("<input disabled class=\"form-control\" type=\"email\" name=\"email\" value=\""
+                            <%out.println("<input disabled class=\"form-control\" type=\"email\" name=\"dummyEmail\" value=\""
+                                + rs.getString("email")
+                                + "\">");%>
+                            <%out.println("<input class=\"form-control\" type=\"hidden\" name=\"email\" value=\""
                                 + rs.getString("email")
                                 + "\">");%>
                         </td>
