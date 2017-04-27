@@ -20,8 +20,8 @@ body{
   padding-bottom: 50px;
 }
 
-/* Adjust max-width to control navbar collapse size
-@media (max-width: 894px) {
+/* Adjust max-width to control navbar collapse size*/
+@media (max-width: 998px) {
     .navbar-header {
         float: none;
     }
@@ -50,25 +50,14 @@ body{
         float: none;
         margin: 15px 0;
     }
-     since 3.1.0 
-    .navbar-collapse.collapse.in { 
+/*     since 3.1.0*/
+    .navbar-collapse.collapse.in {
         display: block!important;
     }
     .collapsing {
         overflow: hidden!important;
     }
-    .navbar-collapse.collapse.in { 
-        display: block!important; 
+    .navbar-collapse.collapse.in {
+        display: block!important;
     }
-}*/
-
-
-
-
-
-
-
-
-
-
-
+}

@@ -114,7 +114,7 @@
 
                     //end Bidding Sale
                 }
-                out.println("<h1>Item successfully added for sale" + "ItemID= " + itemID+ " CID = " + request.getParameter("cid") +"</h1>");
+                out.println("<h1>Item successfully added for sale</h1>");
                 connection.close();
               }
             }

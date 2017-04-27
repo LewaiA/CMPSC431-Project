@@ -61,7 +61,7 @@
                         out.print("<a href=\"item.jsp?itemID="+
                                 rs.getString("itemID")
                                 +"\">");
-                        out.print(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+                        out.print(rs.getString("name")+"</br>");
                         out.println("</a>");
                     }
 

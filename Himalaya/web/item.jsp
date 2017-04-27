@@ -29,13 +29,13 @@
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
         <!-- End load navigation bar -->
 
         <div class="translucentDiv">
             <%
                 try {
-                    
+
                     // --- Submit bid --- //
                     if (request.getParameter("submitBid") != null){
                         // --- Check that user is logged in --- //
@@ -64,7 +64,7 @@
                             connection.close();
                         }
                     }
-                    
+
                     // --- Submit rating --- //
                     if (request.getParameter("submitRating") != null){
                         // --- Check that user is logged in --- //
@@ -76,7 +76,7 @@
                             Context context = (Context) initialContext.lookup("java:comp/env");
                             DataSource ds = (DataSource) context.lookup("himalaya");
                             Connection connection = ds.getConnection();
-                            
+
                             PreparedStatement preparedStmt = connection.prepareStatement(
                                     "INSERT INTO Rating VALUES (?,?,?,?)");
                             preparedStmt.setString(1, request.getSession().getAttribute("email").toString());
@@ -84,10 +84,10 @@
                             preparedStmt.setString(3, request.getParameter("stars"));
                             preparedStmt.setString(4, request.getParameter("review"));
                             preparedStmt.executeUpdate();
-                            
+
                             connection.close();
                         }
-                        
+
                     }
 
                     // --- Get item info --- //
@@ -107,12 +107,12 @@
                         PreparedStatement preparedStmt = connection.prepareStatement(
                                 "SELECT * FROM Items I WHERE I.itemID=?");
                         preparedStmt.setString(1, request.getParameter("itemID"));
-                        ResultSet rs = preparedStmt.executeQuery();                        
-                        if(rs.next()) {       
+                        ResultSet rs = preparedStmt.executeQuery();
+                        if(rs.next()) {
                             out.println("<h1>");
                             out.println(rs.getString("name"));
                             out.println("</h1>");
-                            
+
                             out.println("<img style=\"max-width:75%;\" src=\""
                                     + rs.getString("img_url")
                                     + "\">&nbsp;&nbsp;&nbsp;");
@@ -120,7 +120,7 @@
                             out.println("<h4>Quantity available: "
                                     + rs.getString("qty")
                                     + "&nbsp;&nbsp;&nbsp;");
-                            
+
                             out.println("Seller URL: ");
                             out.println("<a href=\"" + rs.getString("seller_url") + "\">" + rs.getString("seller_url") + "</a>");
                             out.println("</h4>");
@@ -132,13 +132,13 @@
                         else {
                            out.println("<h1>An error occurred</h1>");
                         }
-                        
+
                         // --- Get average rating --- //
                         preparedStmt = connection.prepareStatement(
                                 "SELECT AVG(stars) AS avgRating FROM Rating R WHERE R.itemID=? GROUP BY itemID");
                         preparedStmt.setString(1, request.getParameter("itemID"));
-                        rs = preparedStmt.executeQuery();                        
-                        if(rs.next()) {    
+                        rs = preparedStmt.executeQuery();
+                        if(rs.next()) {
                             out.println("<h4>Average rating: ");
                             out.println(rs.getString("avgRating"));
                             out.println(" / 5 peaks</h4>");
@@ -151,8 +151,8 @@
                         preparedStmt = connection.prepareStatement(
                                 "SELECT * FROM DsaleMethod D,Items I WHERE D.itemID=? AND D.itemID=I.itemID");
                         preparedStmt.setString(1, request.getParameter("itemID"));
-                        rs = preparedStmt.executeQuery();                        
-                        if(rs.next()) {       
+                        rs = preparedStmt.executeQuery();
+                        if(rs.next()) {
                             out.println("<h4>Price per item: $" + rs.getString("price") + " ");
                             out.println("<form name=\"buyItem\" method=\"POST\" action=\"confirmBuyItem.jsp?itemID="
                                     + request.getParameter("itemID")
@@ -176,13 +176,13 @@
                         preparedStmt = connection.prepareStatement(
                                 "SELECT * FROM BiddingMethod WHERE itemID=?");
                         preparedStmt.setString(1, request.getParameter("itemID"));
-                        rs = preparedStmt.executeQuery();                        
-                        if(rs.next()) {       
+                        rs = preparedStmt.executeQuery();
+                        if(rs.next()) {
                             out.println("<h4>Current bid: $" + rs.getString("current_bid") + " ");
                             out.println("&nbsp;Current bidder: ");
                             out.println(rs.getString("current_bidder"));
-                            
-                            
+
+
                             out.println("<form name=\"bidOnItem\" method=\"POST\" action=\"item.jsp?itemID="
                                     + request.getParameter("itemID")
                                     + "\" onsubmit=\"return validate_bid();\">");
@@ -195,9 +195,9 @@
                             out.println("<input type=\"hidden\" name=\"minBid\" value=\""
                                     + rs.getString("min_bid")
                                     + "\">");
-                            
+
                             if (rs.getBoolean("active")){
-                                %>        
+                                %>
                                     <input type="number" name="newBid" placeholder="Enter new bid">
                                     <input type="submit" name="submitBid" class="btn btn-default" value="Place bid">
                                 </form>
@@ -215,7 +215,7 @@
 
                         // --- Leave item rating --- //
                         if (request.getSession().getAttribute("email") != null){
-                            
+
                             // --- Leave rating on only items bought --- //
                             preparedStmt = connection.prepareStatement(
                                     "SELECT * FROM PurchaseHistory WHERE itemID=? AND email=?");
@@ -233,7 +233,7 @@
                                 if (rs.next() == false){
                                     out.println("<form name=\"leaveRating\" method=\"POST\" action=\"item.jsp?itemID="
                                             + request.getParameter("itemID")
-                                            + "\" onsubmit=\"return validate_rating();\">"); 
+                                            + "\" onsubmit=\"return validate_rating();\">");
                                     %>
                                     <h4>Rate number of peaks: </h4>
                                         <select class="form-control" name="stars" placeholder="Peaks (1-5)">
@@ -245,7 +245,7 @@
                                         </select>
                                         <textarea type="text" class="form-control" style="vertical-align:top;" name="review" placeholder="Review (optional)"></textarea>
                                         <input type="submit" name="submitRating" class="btn btn-default" value="Leave rating">
-                                    </form>     
+                                    </form>
                                     <%
                                 }
                             }
@@ -277,7 +277,9 @@
                             }
                             out.println("</table>");
                         }
-                        
+
+                        // Show wishList button
+                        out.println("<a class= \"btn btn-default\" href=\"wishList.jsp?itemID="+request.getParameter("itemID")+"\">Add Item to Wishlist</a>");
                         connection.close();
                     }
                 }
@@ -287,12 +289,12 @@
                 }
             %>
         </div>
-            
+
         <script type="text/javascript">
             function validate_buy(){
                 var qty = document.buyItem.quantity.value;
                 var availableQty = document.buyItem.availableQty.value;
-                
+
                 if (parseInt(qty) < 0){
                     alert("Quantity cannot be negative");
                     return false;
@@ -306,7 +308,7 @@
                     return false;
                 }
                 else if (parseInt(qty) > parseInt(availableQty)){
-                    alert("Quantity availble:  " + availableQty 
+                    alert("Quantity availble:  " + availableQty
                             + "\nDecrase your desired quantity.");
                     return false;
                 }
@@ -314,12 +316,12 @@
                     document.bidOnItem.submit();
                 }
             }
-            
+
             function validate_bid(){
                 var newBid = document.bidOnItem.newBid.value;
                 var prevBid = document.bidOnItem.prevBid.value;
                 var minBid = document.bidOnItem.minBid.value;
-                
+
                 if (parseInt(newBid) < parseInt(prevBid) + 2){
                     alert("New bid must be at least $2 greater");
                     return false;
@@ -337,11 +339,11 @@
                 }
 
             }
-            
+
             function validate_rating(){
                 var rating = document.leaveRating.stars.value;
                 var review = document.leaveRating.review.value;
-                
+
                 if (parseInt(rating) > 5 || parseInt(rating) < 1){
                     alert("Rating must be between 1 and 5");
                     return false;
@@ -355,6 +357,6 @@
                 }
             }
         </script>
-    
+
     </body>
 </html>
