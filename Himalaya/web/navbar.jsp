@@ -1,3 +1,10 @@
+<%@page import="javax.naming.Context"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
 <!-- Navigation bar-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -16,9 +23,34 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class=""><a href="allitems.jsp">All Items</a></li>
-                <li class=""><a href="browseItems.jsp">Browse</a></li>
-                <li class=""><a href="addItem.html">Sell</a></li>
-                </li>
+                <li class=""><a href="addItem.jsp">Sell</a></li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse Categories<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <%
+                          InitialContext initialContext = new InitialContext();
+                          Context context = (Context) initialContext.lookup("java:comp/env");
+                          //The JDBC Data source that we just created
+                          DataSource ds = (DataSource) context.lookup("himalaya");
+                          Connection connection = ds.getConnection();
+
+                          if (connection == null)
+                          {
+                              throw new SQLException("Error establishing connection!");
+                          }
+
+                          PreparedStatement preparedStmt = connection.prepareStatement("SELECT * FROM category WHERE pcid=0");
+                          ResultSet rs = preparedStmt.executeQuery();
+                          while(rs.next()){
+                              out.println("<li>" + "<a href=\"categories.jsp?CID="+rs.getString("CID")+"\"> "  + rs.getString("CNAME") + "</a></li>");
+                          }
+
+                          connection.close();
+                      %>
+                    </ul>
+                  </li>
+                  <li>
             </ul>
             <%-- Search Bar --%>
             <form class="navbar-form navbar-left" role="search" method="POST" action="searchResults.jsp">
@@ -30,8 +62,20 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            <%-- </form> --%>
             <%-- Search Bar end --%>
+            <%-- <form class="navbar-form navbar-left" role="price_search" method="POST" action="searchResults.jsp"> --%>
+              <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group col-xs-3">
+                  <div class="input-group-addon">$</div>
+                  <input type="text" class="form-control" name="minimum_price" placeholder="Min Price">
+                </div>
+                <div class="input-group col-xs-3">
+                    <input type="text" class="form-control" name="maximum_price" placeholder="Max Price" >
+                </div>
+              <button type="submit" class="btn btn-primary">Find Price Range</button>
+            </form>
+
 
             <form class="navbar-form navbar-right" role="form">
                 <%

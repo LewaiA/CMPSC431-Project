@@ -85,46 +85,54 @@
                         if (rs.getString("min_bid") != null && rs.getString("current_bid") != null
                                 && Integer.parseInt(rs.getString("min_bid")) <= Integer.parseInt(rs.getString("current_bid"))){
                             
-                            // item sold
-                            out.print("<td>Yes</td>");
-                            preparedStmt = connection.prepareStatement(
-                                    "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?, ?, ?)");
-                            preparedStmt.setString(1, rs.getString("current_bidder"));
-                            preparedStmt.setString(2, rs.getString("itemID"));
-                            format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            now = new java.util.Date();
-                            String dateTime = format.format(now);
-                            preparedStmt.setString(3, dateTime);
-                            preparedStmt.setString(4, "1");
-                            preparedStmt.setString(5, rs.getString("current_bid"));
-                            
-                            // find user card/shipping address
-                            PreparedStatement preparedStmt2 = connection.prepareStatement(
-                                    "SELECT number FROM CCPayment WHERE email=?");
-                            preparedStmt2.setString(1, rs.getString("current_bidder"));
-                            ResultSet rs2 = preparedStmt2.executeQuery();
-                            if (rs2.next()){
-                                preparedStmt.setString(6, rs2.getString("number"));
-                            } else {
-                                preparedStmt.setString(6, null);
+                            // --- is item active? --- //
+                            if (rs.getBoolean("active")){
+                                // item sold
+                                out.print("<td>Yes</td>");
+                                preparedStmt = connection.prepareStatement(
+                                        "INSERT INTO PurchaseHistory VALUES(?, ?, ?, ?, ?, ?, ?)");
+                                preparedStmt.setString(1, rs.getString("current_bidder"));
+                                preparedStmt.setString(2, rs.getString("itemID"));
+                                format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                now = new java.util.Date();
+                                String dateTime = format.format(now);
+                                preparedStmt.setString(3, dateTime);
+                                preparedStmt.setString(4, "1");
+                                preparedStmt.setString(5, rs.getString("current_bid"));
+
+                                // find user card/shipping address
+                                PreparedStatement preparedStmt2 = connection.prepareStatement(
+                                        "SELECT number FROM CCPayment WHERE email=?");
+                                preparedStmt2.setString(1, rs.getString("current_bidder"));
+                                ResultSet rs2 = preparedStmt2.executeQuery();
+                                if (rs2.next()){
+                                    preparedStmt.setString(6, rs2.getString("number"));
+                                } else {
+                                    preparedStmt.setString(6, null);
+                                }
+                                preparedStmt2 = connection.prepareStatement(
+                                        "SELECT * FROM ShippingAddress WHERE email=?");
+                                preparedStmt2.setString(1, rs.getString("current_bidder"));
+                                rs2 = preparedStmt2.executeQuery();
+                                if (rs2.next()){
+                                    preparedStmt.setString(7, rs2.getString("street") + " " + rs2.getString("city") + " " + rs2.getString("state") + " " + rs2.getString("ZIP"));
+                                } else {
+                                    preparedStmt.setString(7, null);
+                                }
+                                preparedStmt.executeUpdate();
+
+
+                                // deactivate auction
+                                preparedStmt = connection.prepareStatement(
+                                        "UPDATE BiddingMethod SET active=false WHERE itemID=?");
+                                preparedStmt.setString(1, rs.getString("itemID"));
+
+
+                                preparedStmt.executeUpdate();
                             }
-                            preparedStmt2 = connection.prepareStatement(
-                                    "SELECT * FROM ShippingAddress WHERE email=?");
-                            preparedStmt2.setString(1, rs.getString("current_bidder"));
-                            rs2 = preparedStmt2.executeQuery();
-                            if (rs2.next()){
-                                preparedStmt.setString(7, rs2.getString("street") + " " + rs2.getString("city") + " " + rs2.getString("state") + " " + rs2.getString("ZIP"));
-                            } else {
-                                preparedStmt.setString(7, null);
+                            else {
+                                out.println("<td>Previously</td>");
                             }
-                            
-                            // deactivate auction
-                            preparedStmt = connection.prepareStatement(
-                                    "UPDATE BiddingMethod SET active=false WHERE itemID=?");
-                            preparedStmt.setString(1, rs.getString("itemID"));
-                            
-                            
-                            preparedStmt.executeUpdate();
                             
                         }
                         else {  // item not sold

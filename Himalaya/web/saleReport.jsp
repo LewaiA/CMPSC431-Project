@@ -39,8 +39,25 @@
         <!-- End load navigation bar -->
         
         <div class="translucentDiv">
-            <h1 align="center">Today's Current Transactions</h1>
-            
+            <h1 align="center">Current Transactions</h1>
+            <form align="center" name="saleDate" method="POST" action="saleReport.jsp" >
+                <%
+                    if (request.getParameter("date") == null){
+                        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                        java.util.Date n = new java.util.Date();
+                        String begin = f.format(n);
+                        out.println("<input required class=\"form-control\" type=\"date\" name=\"date\" value=\""
+                                + begin
+                                + "\">");
+                    }
+                    else {
+                        out.println("<input required class=\"form-control\" type=\"date\" name=\"date\" value=\""
+                                + request.getParameter("date")
+                                + "\">");
+                    }
+                %>
+                <input style="visibility: hidden;" class="btn btn-default" type="submit" value="Choose Day" name="submit">
+            </form>
             <%
                 try{
                     InitialContext initialContext = new InitialContext();
@@ -56,10 +73,17 @@
                     
                     PreparedStatement preparedStmt = connection.prepareStatement(
                             "SELECT * FROM PurchaseHistory WHERE date >= ? AND date <= ?");
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    java.util.Date now = new java.util.Date();
-                    String dateBegin = format.format(now) + " 00:00:00";
-                    String dateEnd = format.format(now) + " 23:59:59";
+                    String dateBegin, dateEnd;
+                    if (request.getParameter("date") == null){
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        java.util.Date now = new java.util.Date();
+                        dateBegin = format.format(now) + " 00:00:00";
+                        dateEnd = format.format(now) + " 23:59:59";
+                    }
+                    else {
+                        dateBegin = request.getParameter("date") + " 00:00:00";
+                        dateEnd = request.getParameter("date") + " 23:59:59";
+                    }
                     preparedStmt.setString(1, dateBegin);
                     preparedStmt.setString(2, dateEnd);
                     ResultSet rs = preparedStmt.executeQuery();

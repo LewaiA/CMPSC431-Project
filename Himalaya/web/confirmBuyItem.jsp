@@ -135,7 +135,14 @@
                             preparedStmt.setString(6, request.getParameter("creditCard"));
                             preparedStmt.setString(7, request.getParameter("shippingAddress"));
                             preparedStmt.executeUpdate();
-
+                            
+                            // --- Decrease item quantity --- //
+                            preparedStmt = connection.prepareStatement(
+                                    "UPDATE Items SET qty=qty-? WHERE itemID=?");
+                            preparedStmt.setString(1, request.getParameter("quantity"));
+                            preparedStmt.setString(2, request.getParameter("itemID"));
+                            preparedStmt.executeUpdate();
+                            
                             out.println("<h3 style=\"color:green;display:table;margin:0 auto;\">You have successfully bought the item</h3>");
 
                             connection.close();

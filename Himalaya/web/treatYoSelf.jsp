@@ -28,9 +28,9 @@
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
         <!-- End load navigation bar -->
-    
+
         <div class="translucentDiv">
             <h1 align="center">Treat Yo' Self</h1>
             <%
@@ -55,12 +55,12 @@
                         preparedStmt.setString(1, request.getSession().getAttribute("email").toString());
                         preparedStmt.setString(2, request.getParameter("budget"));
                         preparedStmt.setString(3, request.getParameter("CID"));
-                        
+
                         preparedStmt.executeUpdate();
-                        
+
                         connection.close();
                     }
-                    
+
                     // --- Unsubscribe from TYS --- //
                     if (request.getParameter("unsubscribeTYS") != null){
                         InitialContext initialContext = new InitialContext();
@@ -78,9 +78,9 @@
                         PreparedStatement preparedStmt = connection.prepareStatement(
                                 "DELETE FROM TreatYoSelf WHERE email=?");
                         preparedStmt.setString(1, request.getSession().getAttribute("email").toString());
-                        
+
                         preparedStmt.executeUpdate();
-                        
+
                         connection.close();
                     }
 
@@ -110,14 +110,15 @@
                             rs.beforeFirst();
                             %>
                             <h4 style="padding-left:50px;padding-right:50px" align="center">
-                                You're signed up to Treat Yo' Self. Click below to unsubscribe.
+                                You're signed up to Treat Yo' Self. You can sit back and relax now.<br/>
+                                Click below to unsubscribe.
                             </h4>
                             <form align="center" name="unsubscribeTYS" method="POST" action="treatYoSelf.jsp">
                                 <input class="btn btn-danger" type="submit" value="Unsubscribe" name="unsubscribeTYS">
                             </form>
                             <%
-                            
-                                
+
+
                         }
                         else {      // user hasn't signed up
                             %>
@@ -148,7 +149,7 @@
                                                 preparedStmt = connection.prepareStatement(
                                                         "SELECT * FROM Category");
                                                 rs = preparedStmt.executeQuery();
-                                                
+
                                                 while(rs.next()){
                                                     out.println("<option value=\""
                                                             + rs.getString("CID")
@@ -181,7 +182,7 @@
                 }
             %>
         </div>
-            
+
         <script type="text/javascript">
             function validate_TYS(){
                 document.treatYoSelf.submit();

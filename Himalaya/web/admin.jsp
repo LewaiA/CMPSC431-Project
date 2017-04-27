@@ -26,6 +26,7 @@
             <a href="telemarketingReport.jsp" class="btn btn-info">Telemarketing Report</a>
             <a href="saleReport.jsp" class="btn btn-info">Sale Report</a>
             <a href="terminateAuction.jsp" class="btn btn-info">Terminate Auctions</a>
+            <a href="treatYoSelfAdmin.jsp" class="btn btn-info">Execute Treat Yo' Self</a>
         </div>
         
     </body>

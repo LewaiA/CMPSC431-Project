@@ -113,7 +113,7 @@
                             out.println(rs.getString("name"));
                             out.println("</h1>");
                             
-                            out.println("<img src=\""
+                            out.println("<img style=\"max-width:75%;\" src=\""
                                     + rs.getString("img_url")
                                     + "\">&nbsp;&nbsp;&nbsp;");
 
@@ -149,7 +149,7 @@
 
                         // --- Get DsaleMethod information (if exists) --- //
                         preparedStmt = connection.prepareStatement(
-                                "SELECT * FROM DsaleMethod WHERE itemID=?");
+                                "SELECT * FROM DsaleMethod D,Items I WHERE D.itemID=? AND D.itemID=I.itemID");
                         preparedStmt.setString(1, request.getParameter("itemID"));
                         rs = preparedStmt.executeQuery();                        
                         if(rs.next()) {       
@@ -162,6 +162,9 @@
                                     + "\">");
                             out.println("<input type=\"hidden\" name=\"price\" value=\""
                                     + rs.getString("price")
+                                    + "\">");
+                            out.println("<input type=\"hidden\" name=\"availableQty\" value=\""
+                                    + rs.getString("qty")
                                     + "\">");
                             out.println("<input type=\"number\" name=\"quantity\" placeholder=\"Quantity\">");
                             out.println("<input type=\"submit\" name=\"submitBuy\" class=\"btn btn-default\" value=\"Buy Now\">");
@@ -288,6 +291,7 @@
         <script type="text/javascript">
             function validate_buy(){
                 var qty = document.buyItem.quantity.value;
+                var availableQty = document.buyItem.availableQty.value;
                 
                 if (parseInt(qty) < 0){
                     alert("Quantity cannot be negative");
@@ -299,6 +303,11 @@
                 }
                 else if (qty == "") {
                     alert("No quantity entered");
+                    return false;
+                }
+                else if (parseInt(qty) > parseInt(availableQty)){
+                    alert("Quantity availble:  " + availableQty 
+                            + "\nDecrase your desired quantity.");
                     return false;
                 }
                 else {
