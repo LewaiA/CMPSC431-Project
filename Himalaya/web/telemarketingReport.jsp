@@ -60,7 +60,8 @@
                     <tr>
                         <th>Name</th> 
                         <th>Address</th> 
-                        <th>E-mail</th> <th>Phone</th> 
+                        <th>E-mail</th> 
+                        <th>Phone</th> 
                         <th>Age</th> 
                         <th>Gender</th> 
                         <th>Annual Income</th> 
@@ -72,11 +73,14 @@
                 {
                     out.print("<tr>");
                       
+                        out.print("<td>" + rs.getString("name") + "</td>");
+                        out.print("<td>" + rs.getString("shipAddr") + "</td>");
                         out.print("<td>" + rs.getString("email") + "</td>");
-                        out.print("<td>" + rs.getString("itemId") + "</td>");                          
-                        out.print("<td>" + rs.getString("date") + "</td>");
+                        out.print("<td>" + rs.getString("phone") + "</td>");                          
+                        out.print("<td>" + rs.getString("age") + "</td>");
+                        out.print("<td>" + rs.getString("gender") + "</td>");
+                        out.print("<td>$" + rs.getString("income") + "</td>");
                         out.print("<td>" + rs.getString("quantity") + "</td>");
-                        out.print("<td>$" + rs.getString("pricePaid") + "</td>");
                         
                     out.print("</tr>");
                 }
