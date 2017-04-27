@@ -67,13 +67,12 @@ CREATE TABLE Items(
 		ON DELETE CASCADE
 );
 
-CREATE TABLE Wishlist( 
-	wlID  CHAR(10), 
+CREATE TABLE Wishlist(  
 	date_added  DATE, 
-	privacy   BOOLEAN, 
-	itemID INTEGER, 
+	itemID INTEGER,
+    name VARCHAR(100),
 	email  VARCHAR(100) NOT NULL, 
-	PRIMARY KEY(wlID, itemID, email), 
+	PRIMARY KEY(itemID, email), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID)
 	ON DELETE NO ACTION, 
 	FOREIGN KEY (email) REFERENCES Users (email)

@@ -21,7 +21,7 @@
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-left">
                 <li class=""><a href="allitems.jsp">All Items</a></li>
                 <li class=""><a href="addItem.jsp">Sell</a></li>
 
@@ -53,31 +53,31 @@
                   <li>
             </ul>
             <%-- Search Bar --%>
-            <form class="navbar-form navbar-left" role="search" method="POST" action="searchResults.jsp">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search for Items...">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
+            <ul class="nav navbar-nav navbar-left hidden-xs collapse navbar-collapse" id="removeOnCollapse">
+                <form class="navbar-form" role="search" method="POST" action="searchResults.jsp">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for Items...">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            <%-- </form> --%>
-            <%-- Search Bar end --%>
-            <%-- <form class="navbar-form navbar-left" role="price_search" method="POST" action="searchResults.jsp"> --%>
-              <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                <div class="input-group col-xs-3">
-                  <div class="input-group-addon">$</div>
-                  <input type="text" class="form-control" name="minimum_price" placeholder="Min Price">
-                </div>
-                <div class="input-group col-xs-3">
-                    <input type="text" class="form-control" name="maximum_price" placeholder="Max Price" >
-                </div>
-              <button type="submit" class="btn btn-primary">Find Price Range</button>
-            </form>
+                <%-- Search Bar end --%>
+                <%-- <form class="navbar-form navbar-left" role="price_search" method="POST" action="searchResults.jsp"> --%>
+                  <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                    <div class="input-group col-xs-1">
+                      <input type="text" class="form-control" name="minimum_price" placeholder="Min $">
+                    </div>
+                    <div class="input-group col-xs-1">
+                        <input type="text" class="form-control" name="maximum_price" placeholder="Max $" >
+                    </div>
+                  <button type="submit" class="btn btn-primary">Find Price Range</button>
+                </form>
+            </ul>
 
-
-            <form class="navbar-form navbar-right" role="form">
+            <ul class= "nav navbar-nav navbar-right">
+            <form class="navbar-form" role="form">
                 <%
                     if(request.getSession().getAttribute("email") != null){
                         out.println("<span style=\"color:white;\">Hello, " +
@@ -92,6 +92,7 @@
                     <% }
                 %>
             </form>
+            </ul>
         </div>
     </div>
 </nav>
