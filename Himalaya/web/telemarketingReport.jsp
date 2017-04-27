@@ -1,3 +1,12 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,23 +30,71 @@
         </script> 
     <!-- End load navigation bar -->
     
-    <div class="translucentDiv">
+        <div class="translucentDiv">
         <h1 align="center">Telemarketing Report</h1>
         <table align="center" border="1px solid black" width="100%">
-            <tr>
-                <th>Name</th> 
-                <th>Address</th> 
-                <th>E-mail</th> <th>Phone</th> 
-                <th>Age</th> 
-                <th>Gender</th> 
-                <th>Annual Income</th> 
-                <th># of Bid Activities</th>
-            </tr>
-            <tr>
-                
-            </tr>
-        </table>
-    </div>
+        <%
+            try{
+                InitialContext initialContext = new InitialContext();
+                Context context = (Context) initialContext.lookup("java:comp/env");
+                //The JDBC Data source that we just created
+                DataSource ds = (DataSource) context.lookup("himalaya");
+                Connection connection = ds.getConnection();
+
+                if (connection == null)
+                {
+                    throw new SQLException("Error establishing connection!");
+                }
+                    
+                PreparedStatement preparedStmt = connection.prepareStatement(
+                       "SELECT * FROM PurchaseHistory WHERE date >= ? AND date <= ?");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date now = new java.util.Date();
+                String dateBegin = format.format(now) + " 00:00:00";
+                String dateEnd = format.format(now) + " 23:59:59";
+                preparedStmt.setString(1, dateBegin);
+                preparedStmt.setString(2, dateEnd);
+                ResultSet rs = preparedStmt.executeQuery();
+
+                %>
+                    <tr>
+                        <th>Name</th> 
+                        <th>Address</th> 
+                        <th>E-mail</th> 
+                        <th>Phone</th> 
+                        <th>Age</th> 
+                        <th>Gender</th> 
+                        <th>Annual Income</th> 
+                        <th># of Bid Activities</th>
+                    </tr>
+                <%
+                    
+                while (rs.next())
+                {
+                    out.print("<tr>");
+                      
+                        out.print("<td>" + rs.getString("name") + "</td>");
+                        out.print("<td>" + rs.getString("shipAddr") + "</td>");
+                        out.print("<td>" + rs.getString("email") + "</td>");
+                        out.print("<td>" + rs.getString("phone") + "</td>");                          
+                        out.print("<td>" + rs.getString("age") + "</td>");
+                        out.print("<td>" + rs.getString("gender") + "</td>");
+                        out.print("<td>$" + rs.getString("income") + "</td>");
+                        out.print("<td>" + rs.getString("quantity") + "</td>");
+                        
+                    out.print("</tr>");
+                }
+                    
+                out.print("</table>");
+                    
+                    connection.close();
+                }
+                catch (Exception e){
+                    out.println("<h1>An error occurred<h1>");
+                    out.println("Error: " + e.getMessage());
+                }
+        %>
+        </div>
         
     </body>
 </html>
