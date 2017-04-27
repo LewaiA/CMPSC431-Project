@@ -98,7 +98,7 @@
               out.print("<a href=\"item.jsp?itemID="+
                       rs.getString("itemID")
                       +"\">");
-              out.print(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
+              out.print(rs.getString("name")+"</br>");
               out.println("</a>");
           }
 
@@ -112,9 +112,6 @@
         }
         %>
 
-    </div>
-    <div align="center">
-        <a class= "btn btn-default" href="index.jsp">Return to Home Page</a>
     </div>
     </body>
 </html>
