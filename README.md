@@ -11,4 +11,4 @@ A running instance of MySQL is also needed for the website's backend. If not alr
 initDB.sql must be run __first__ to create the database schemas for Himalaya.com. populateDB.sql must be run __second__ to populate the database with dummy data stored the text files in ./MySQL/Init_DB/populateData/.
 
 
-After the database is initialized, the NetBeans project can be opened and run. The project is configured to run off the Tomcat server built into NetBeans and shouldn't need any further configuration before running.
+#### After the database is initialized, the NetBeans project can be opened and run. The project is configured to run off the Tomcat server built into NetBeans and shouldn't need any further configuration before running.
