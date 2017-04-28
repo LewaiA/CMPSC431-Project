@@ -1,60 +1,60 @@
-﻿01,IPhone4S,Smart Phone,NULL,NULL,30,111,01,111
-02,IPhone7+,Smart Phone,NULL,NULL,21,111,02,111
-03,Samsung Galaxy S7,Smart Phone,NULL,NULL,15,111,03,111
-04,Samsung Galaxy Nexus,Smart Phone,NULL,NULL,12,111,04,111
-05,Caress Daily Silk Beauty Bar,Soap,NULL,NULL,11,321,05,321
-06,Dr. Bronner’s Classic Fair Trade Bar Soap,Soap,NULL,32,321,06,321
-07,Tide PureClean,Detergent,NULL,NULL,10,321,07,321
-08,Tide Plues Bleach Powder,Bleach,NULL,NULL,34,321,08,321
-09,Arizona Sectional Sofa,Furniture,NULL,NULL,12,312,09,312
-10,Urban Farm LL 128,fertilizer,NULL,NULL,10,325,10,325
-11,Jonathan Green 10458,Fertilizer,NULL,NULL,12,325,11,325
-12,baker Green Heirloom Seeds,Seeds,NULL,NULL,13,326,12,326
-13,Seeds of Change,Seeds,NULL,NULL,10,326,13,326
-14,Renee's Garden Seeds,Seeds,NULL,NULL,30,326,14,326
-15,The Black Book,Physical Book,NULL,NULL,25,411,15,411
-16,All By Myself,Physical Book,NULL,NULL,25,411,16,411
-17,The Chosen,Physical Book,NULL,NULL,25,411,17,411
-18,The Lost Order,Physical Book,NULL,NULL,25,411,18,411
-19,The Flame Alphabet,Physical Book,NULL,NULL,25,411,19,411
-20,Harry Potter and The Order of the Phoenix,Physical Book,NULL,NULL,25,411,20,411
-21,Gardens of the Moon,Digital Book,NULL,NULL,25,412,21,412
-22,The Crippled God,Digital Book,NULL,NULL,25,412,22,412
-23,Memories of Ice,Digital Book,NULL,NULL,25,412,23,412
-24,UE Boom 2,Speakers,NULL,NULL,17,511,24,511
-25,JBL Pulse 2,Speakers,NULL,NULL,17,511,25,511
-26,JBL Charge 2+,Speakers,NULL,NULL,17,511,26,511
-27,SoundTouch 10,Speakers,NULL,NULL,17,511,27,511
-28,UE Megaboom,Speakers,NULL,NULL,17,511,28,511
-29,Bose SoundLink Mini II,Speakers,NULL,NULL,17,511,29,511
-30,JBL Flip 3,Speakers,NULL,NULL,17,511,30,511
-31,Bose SoundLink Speaker III,Speakers,NULL,NULL,17,511,31,511
-32,TDK Life On Record Max A34,Speakers,NULL,NULL,17,511,32,511
-33,Sony SRS-X5,Speakers,NULL,NULL,17,511,33,511
-34,Seiko,Wristwatch,NULL,NULL,65,825,34,825
-35,Timex,Wristwatch,NULL,NULL,65,825,35,825
-36,Rolex,Wristwatch,NULL,NULL,65,825,36,825
-37,Lanvin,Belt,NULL,NULL,65,825,37,825
-38,Saint Laurent,Belt,NULL,NULL,65,825,38,825
-39,Givenchy,Belt,NULL,NULL,65,825,39,825
-40,Gucci,Belt,NULL,NULL,65,825,40,825
-41,Burberry,Belt,NULL,NULL,65,825,41,825
-42,Valvoline,Motor Oil,NULL,NULL,69,1124,42,1124
-43,Mobil 1,Motor Oil,NULL,NULL,69,1124,43,1124
-44,Casstrol, Motor Oil, NULL, NULL, 69, 1124,44,1124
-45,Amsoil,Motor Oil,NULL,NULL,69,1124,45,1124
-46,Pennzoil,Motor Oil,NULL,NULL,69,1124,46,1124
-47,Shell,Motor Oil,NULL,NULL,69,1124,47,1124
-48,Petronas,Motor Oil,NULL,NULL,69,1124,48,1124
-49,Fuchs,Motor Oil,NULL,NULL,69,1124,49,1124
-50,Motul,Motor Oil,NULL,NULL,69,1124,50,1124
-51,Lucas Oil,Motor Oil,NULL,NULL,69,1124,51,1124
-52,Synology RT2600ac,Router,NULL,NULL,73,527,52,527
-53,Asus RT-AC88U,Router,NULL,NULL,73,527,53,527 
-54,Amped Wireless Ally Plus,Router,NULL,NULL,73,527,54,527 
-55,Google WiFi,Router,NULL,NULL,73,527,55,527 
-56,Synology RT1900ac,Router,NULL,NULL,73,527,56,527 
-57,Netgear Orbi Wi-Fi System,Router, NULL, NULL, 73,527,57,527 
-58,Asus RT-AC3200,Router,NULL,NULL,73,527,58,527 
-59,TP-Link Deco M5 Whole-Home,Router,NULL,NULL,73,527,59,527
-60,Eero,Router,NULL,NULL,73,527,60,527
+01,IPhone4S,Smart Phone,,https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_4s.png?itok=AePVr0NO,30,111
+02,IPhone7+,Smart Phone,,https://cdn.macrumors.com/article-new/2015/02/iphone7lineup.jpg,21,111
+03,Samsung Galaxy S7,Smart Phone,,https://www.att.com/catalog/en/skus/images/samsung-galaxy%20s7-black%20onyx-450x350.png?01AD=3hb3DUyq2FF31FyDaaMZZjkQjhYUvAyAKyYSYFkSCd_LbOlt9JKBShw&01RI=DA477C5D27CC40F&01NA=,15,111
+04,Samsung Galaxy Nexus,Smart Phone,,http://cdn2.gsmarena.com/vv/pics/samsung/Samsung-Galaxy-Nexus-genuine-white.jpg,12,111
+05,Caress Daily Silk Beauty Bar,Soap,,http://images.totalbeauty.com/content/photos/12-best-bar-soaps-12.jpg,11,321
+06,Dr. Bronners Classic Fair Trade Bar Soap,Soap,,https://images-na.ssl-images-amazon.com/images/I/51GlnIhRgJL._SX355_.jpg,32,321
+07,Tide PureClean,Detergent,,http://mms.businesswire.com/media/20160519005211/en/525636/5/Tide_purclean_Honey_Lavender_highres.jpg,10,321
+08,Tide Plus Bleach Powder,Bleach,,http://ghk.h-cdn.co/assets/cm/15/12/55091a6525b0a-ghk-1-ultra-tide-plus-bleach-powder-xl.jpg,34,321
+09,Arizona Sectional Sofa,Furniture,,https://www.leathergroups.com/shop/images/D.cache.dpthmbn/1204.jpg,12,312
+10,Urban Farm LL 128,fertilizer,,http://ep.yimg.com/ay/yhst-28355172338643/urban-farm-fertilizers-ll128-liquid-lawn-128-fl-oz-fertilizer-3.gif,10,325
+11,Jonathan Green 10458,Fertilizer,,https://images-na.ssl-images-amazon.com/images/I/91it5%2BSGE2L._SY550_.jpg,12,325
+12,baker Green Heirloom Seeds,Seeds,,https://s-media-cache-ak0.pinimg.com/originals/a9/43/8f/a9438f2f98af96b084001db96ca8b286.jpg,13,326
+13,Seeds of Change,Seeds,,https://images-na.ssl-images-amazon.com/images/I/916cCQxAVfL._AC_UL320_SR242,320_.jpg,10,326
+14,Renee's Garden Seeds,Seeds,,https://thegardendiaries.files.wordpress.com/2015/02/bulbs-and-seeds.jpg?w=640,30,326
+15,The Black Book,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/5195pFJv%2BkL._SX353_BO1,204,203,200_.jpg,25,411
+16,All By Myself,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/61H3NZ5BQ8L.jpg,25,411
+17,The Chosen,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/41ZPUySSONL._SY344_BO1,204,203,200_.jpg,25,411
+18,The Lost Order,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/51H1pKtYLKL._SY344_BO1,204,203,200_.jpg,25,411
+19,The Flame Alphabet,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/51OE5GQ6S-L._SY344_BO1,204,203,200_.jpg,25,411
+20,Harry Potter and The Order of the Phoenix,Physical Book,,https://images-na.ssl-images-amazon.com/images/I/51SfTd37PaL._SX258_BO1,204,203,200_.jpg,25,411
+21,Gardens of the Moon,Digital Book,,https://images-na.ssl-images-amazon.com/images/I/817CteSzxqL.jpg,25,412
+22,The Crippled God,Digital Book,,http://vignette2.wikia.nocookie.net/malazan/images/5/5b/Crippled_god.jpg/revision/latest?cb=20101228134518,25,412
+23,Memories of Ice,Digital Book,,http://vignette3.wikia.nocookie.net/malazan/images/f/f2/Memories_of_Ice.jpg/revision/latest?cb=20131013110022,25,412
+24,UE Boom 2,Speakers,,https://assets.ultimateears.com/e/k/b/xmetqf/ueboom2-desktop.png,17,511
+25,JBL Pulse 2,Speakers,,https://www.bhphotovideo.com/images/images2000x2000/jbl_jblpulse2silus_pulse_2_portable_bluetooth_1182616.jpg,17,511
+26,JBL Charge 2+,Speakers,,https://images-na.ssl-images-amazon.com/images/I/91wFz6XyHpL._SL1500_.jpg,17,511
+27,SoundTouch 10,Speakers,,https://images-na.ssl-images-amazon.com/images/I/81FFWW53dIL._SL1500_.jpg,17,511
+28,UE Megaboom,Speakers,,http://img.bbystatic.com/BestBuy_US/images/products/8749/8749545ld.jpg,17,511
+29,Bose SoundLink Mini II,Speakers,,https://images-na.ssl-images-amazon.com/images/I/71IL85DU4iL._SL1500_.jpg,17,511
+30,JBL Flip 3,Speakers,,http://www.soundguys.com/wp-content/uploads/2015/09/JBL-Flip-32.jpg,17,511
+31,Bose SoundLink Speaker III,Speakers,,https://images-na.ssl-images-amazon.com/images/G/01/aplus/detail-page/bose_soundlinkiii_hero.jpg,17,511
+32,TDK Life On Record Max A34,Speakers,,http://loudestportablespeakers.com/wp-content/uploads/2015/10/A-TDK-Life-On-Record-TREK-MAX-A34-Review-e1444719662310.jpg,17,511
+33,Sony SRS-X5,Speakers,,https://www.bhphotovideo.com/images/images2500x2500/sony_srsx5_blk_srsx5_powerful_portable_bluetooth_1051870.jpg,17,511
+34,Seiko,Wristwatch,,http://cdn2.jomashop.com/media/catalog/product/s/e/seiko-5-blue-dial-diver-stainless-steel-automatic-men_s-watch-snzf15_7.jpg,65,825
+35,Timex,Wristwatch,,http://cdn.shopify.com/s/files/1/0186/1574/products/TW2P84000_1024x1024.jpg?v=1457979639,65,825
+36,Rolex,Wristwatch,,http://cdn2.jomashop.com/media/catalog/product/r/o/rolex-cosmograph-daytona-green-dial-18k-yellow-gold-oyster-men_s-watch-116508grso.jpg,65,825
+37,Lanvin,Belt,,http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=81068081,65,825
+38,Saint Laurent,Belt,,https://cdnd.lystit.com/200/250/tr/photos/farfetch/11823480-BLACK-6a5f2e14-.jpeg,65,825
+39,Givenchy,Belt,,https://cdnc.lystit.com/photos/0692-2014/05/06/givenchy-black-belt-product-1-19730825-0-904508623-normal.jpeg,65,825
+40,Gucci,Belt,,http://groupon.s3.amazonaws.com/sponsorship-imgs/Goods/Men%27s%20and%20Women%27s%20Gucci%20Belts/799632405184.jpg,65,825
+41,Burberry,Belt,,https://images.bloomingdales.com/is/image/BLM/products/5/optimized/8880865_fpx.tif?$2014_BROWSE_FASHION$,65,825
+42,Valvoline,Motor Oil,,http://www.valvolineeurope.com/include/images/product-lubricant.png,69,1124
+43,Mobil 1,Motor Oil,,https://mobiloil.com/~/media/amer/us/pvl/products/motor-oils/mobil-1-brand/mobil-1-classic/products/mobil-1-synthetic-oil.png,69,1124
+44,Casstrol, Motor Oil,,http://www.castrol.com/content/dam/castrolcountry/fr_be/Products/Car/EngineOils/magnatec-product-page/magnatec-stop-start/magnatec-stop-start-products.jpg,69,1124
+45,Amsoil,Motor Oil,,http://www.amsoil.com/shopres/products/270px/ASL.jpg,69,1124
+46,Pennzoil,Motor Oil,,http://www.vkwholesale.com/images/watermarked/1/detailed/0/3598.jpg,69,1124
+47,Shell,Motor Oil,,http://ecx.images-amazon.com/images/I/81tIWK08mfL._SL1500_.jpg,69,1124
+48,Petronas,Motor Oil,,http://www.mymesra.com.my/assets/contentMS/img/article_thumbnail/thumb_Syntium_Moto_Scooter.png,69,1124
+49,Fuchs,Motor Oil,,http://fuchs.com.sa/sites/default/files/product-items/1%20Ltr.%20HD%2040.jpg,69,1124
+50,Motul,Motor Oil,,http://images.motorcycle-superstore.com/productimages/300/0000-Motul-7100-Synthetic-Oil-4T.jpg,69,1124
+51,Lucas Oil,Motor Oil,,http://s7d4.scene7.com/is/image/Turn5/77760?$enlarged810x608$,69,1124
+52,Synology RT2600ac,Router,,http://www.synology.com/img/products/photo/RT2600ac/002.jpg,73,527
+53,Asus RT-AC88U,Router,,https://www.asus.com/websites/global/products/e5rP2N02bDRfXJUO/V1/img/prod_line_multi.png,73,527 
+54,Amped Wireless Ally Plus,Router,,https://images-na.ssl-images-amazon.com/images/I/71RvfPti%2BEL._SX355_.jpg,73,527 
+55,Google WiFi,Router,,https://cdn0.vox-cdn.com/hermano/verge/product/image/8437/wifi_buy-module_threeproduct-image_1440_2x.jpg,73,527
+56,Synology RT1900ac,Router,,http://www.synology.com/img/products/photo/RT1900ac/002.jpg,73,527 
+57,Netgear Orbi Wi-Fi System,Router,,http://www.netgear.com/images/orbi_old/RBK50_Hero.png,73,527 
+58,Asus RT-AC3200,Router,,http://cdn2.expertreviews.co.uk/sites/expertreviews/files/2015/06/asus_rt-ac3200_a_1831_0.jpg,73,527
+59,TP-Link Deco M5 Whole-Home,Router,,http://www.homedepot.com/catalog/productImages/1000/91/910ca978-1fa4-407a-9e5d-a72f3358f36f_1000.jpg,73,527
+60,Eero,Router,,https://images-na.ssl-images-amazon.com/images/I/61Tad4qpnLL._SY300_.jpg,73,527

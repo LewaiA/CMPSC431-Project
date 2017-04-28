@@ -104,6 +104,5 @@
                 }
                 %>
                 <br/>
-        <div class="text-center"><a href="telemarketingReport.jsp"><button class= "btn btn-warning">Print Transaction Report</button></a></div>
     </body>
 </html>

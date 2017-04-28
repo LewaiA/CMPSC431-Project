@@ -96,25 +96,25 @@
 
                         out.println("<h1>Registration Successful</h1>");
                       
-                        try{
-                            // Send email to user
-                            String to = request.getParameter("email");
-                            String from = "noreply@himalaya.com";
-                            String host = "localhost";
-                            Properties properties = System.getProperties();
-                            properties.setProperty("mail.smtp.host", host);
-                            Session mailSession = Session.getDefaultInstance(properties);
-
-                            MimeMessage message = new MimeMessage(mailSession);
-                            message.setFrom(new InternetAddress(from));
-                            message.addRecipient(Message.RecipientType.TO,
-                                                     new InternetAddress(to));
-                            message.setSubject("This is the Subject Line!");
-                            message.setText("This is actual message");
-                            Transport.send(message);
-                        }catch (MessagingException mex) {
-                            mex.printStackTrace();
-                        }
+//                        try{
+//                            // Send email to user
+//                            String to = request.getParameter("email");
+//                            String from = "noreply@himalaya.com";
+//                            String host = "localhost";
+//                            Properties properties = System.getProperties();
+//                            properties.setProperty("mail.smtp.host", host);
+//                            Session mailSession = Session.getDefaultInstance(properties);
+//
+//                            MimeMessage message = new MimeMessage(mailSession);
+//                            message.setFrom(new InternetAddress(from));
+//                            message.addRecipient(Message.RecipientType.TO,
+//                                                     new InternetAddress(to));
+//                            message.setSubject("This is the Subject Line!");
+//                            message.setText("This is actual message");
+//                            Transport.send(message);
+//                        }catch (MessagingException mex) {
+//                            mex.printStackTrace();
+//                        }
                         
                         
                         connection.close();
