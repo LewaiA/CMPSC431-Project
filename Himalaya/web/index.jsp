@@ -27,21 +27,20 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        
+
     <!-- Load navigation bar -->
         <div id="navbar"></div>
         <script>
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
         <!-- End load navigation bar -->
-    
+
         <h1 align="center" style="color:white">Welcome to Himalaya.com</h1>
         <br/>
         <br/>
-        <br/>
-        
+
                 <%
                 try{
                     InitialContext initialContext = new InitialContext();
@@ -54,17 +53,17 @@
                     {
                         throw new SQLException("Error establishing connection!");
                     }
-                    
+
                     PreparedStatement preparedStmt = connection.prepareStatement(
                             "SELECT * FROM Items ORDER BY rand() LIMIT 1");
                     ResultSet rs = preparedStmt.executeQuery();
                     if (rs.next()){
-                        
+
                     %>
                     <div align="center">
                         <div style="max-width:500px;" align="center" class="translucentDiv">
                             <h1 align="center">Suggested Item</h1>
-                            
+
                             <table>
                                 <td style="padding:5px;">
                                     <tr rowspan="4">
@@ -94,9 +93,9 @@
                         </div>
                     </div>
                     <%
-                        
+
                     }
-                    
+
                     connection.close();
                 }
                 catch(Exception e){
@@ -104,7 +103,7 @@
                     out.println("Error: " + e.getMessage());
                 }
                 %>
-            
-        
+                <br/>
+        <div class="text-center"><a href="telemarketingReport.jsp"><button class= "btn btn-warning">Print Transaction Report</button></a></div>
     </body>
 </html>

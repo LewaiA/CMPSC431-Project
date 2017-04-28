@@ -27,9 +27,9 @@
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
     <!-- End load navigation bar -->
-    
+
         <div class="translucentDiv">
         <h1 align="center">Telemarketing Report</h1>
         <table align="center" border="1px solid black" width="100%">
@@ -45,7 +45,7 @@
                 {
                     throw new SQLException("Error establishing connection!");
                 }
-                    
+
                 PreparedStatement preparedStmt = connection.prepareStatement(
                        "SELECT * FROM PurchaseHistory WHERE date >= ? AND date <= ?");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,36 +57,41 @@
                 ResultSet rs = preparedStmt.executeQuery();
 
                 %>
-                    <tr>
-                        <th>Name</th> 
-                        <th>Address</th> 
-                        <th>E-mail</th> 
-                        <th>Phone</th> 
-                        <th>Age</th> 
-                        <th>Gender</th> 
-                        <th>Annual Income</th> 
+                <table class= "table table-striped table-responsive">
+                        <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>E-mail</th>
+                        <th>Phone</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>Annual Income</th>
                         <th># of Bid Activities</th>
                     </tr>
                 <%
-                    
+
                 while (rs.next())
                 {
                     out.print("<tr>");
-                      
-                        out.print("<td>" + rs.getString("name") + "</td>");
+                        PreparedStatement users = connection.prepareStatement("SELECT * FROM users WHERE email=?");
+                        users.setString(1, rs.getString("email"));
+                        ResultSet why = users.executeQuery();
+
+                        while(why.next()){
+                        out.print("<td>" + why.getString("name") + "</td>");
                         out.print("<td>" + rs.getString("shipAddr") + "</td>");
                         out.print("<td>" + rs.getString("email") + "</td>");
-                        out.print("<td>" + rs.getString("phone") + "</td>");                          
-                        out.print("<td>" + rs.getString("age") + "</td>");
-                        out.print("<td>" + rs.getString("gender") + "</td>");
-                        out.print("<td>$" + rs.getString("income") + "</td>");
+                        out.print("<td>" + why.getString("phone") + "</td>");
+                        out.print("<td>" + why.getString("dob") + "</td>");
+                        out.print("<td>" + why.getString("gender") + "</td>");
+                        out.print("<td>$" + why.getString("income") + "</td>");
                         out.print("<td>" + rs.getString("quantity") + "</td>");
-                        
+                      }
                     out.print("</tr>");
                 }
-                    
+
                 out.print("</table>");
-                    
+
                     connection.close();
                 }
                 catch (Exception e){
@@ -94,7 +99,8 @@
                     out.println("Error: " + e.getMessage());
                 }
         %>
+        </table>
         </div>
-        
+
     </body>
 </html>
