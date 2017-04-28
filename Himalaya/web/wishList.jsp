@@ -71,7 +71,8 @@
                   "<td>Date Added:</td>"+
                   "<td>Direct Price</td>"+
                   "<td>Current/Minimum Bid</td>"+
-                  "<td>Go Buy!</td></tr>");
+                  "<td>Go Buy!</td>"+
+                  "<td>Delete :(</td></tr>");
 
                   while(wishList.next()){
 
@@ -108,7 +109,8 @@
                       }
 
 
-                      out.println("<td><a href=\"item.jsp?itemID="+wishList.getString("itemID")+"\" class=\"btn btn-success\"> Check it out!</a></td></tr>");
+                      out.println("<td><a href=\"item.jsp?itemID="+wishList.getString("itemID")+"\" class=\"btn btn-success\"> Check it out!</a></td>");
+                      out.println("<td><a href=\"deleteWish.jsp?itemID="+wishList.getString("itemID")+"\" class=\"btn btn-danger\"> Delete</a></td></tr>");
                   }
                   out.print("</table>");
               }

@@ -127,8 +127,7 @@ CREATE TABLE BiddingMethod(
     active BOOL,
 	PRIMARY KEY(itemID), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID) 
-		ON DELETE CASCADE ,
-	
+		ON DELETE CASCADE
 );
 
 CREATE TABLE PurchaseHistory(
