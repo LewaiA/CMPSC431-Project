@@ -1,100 +1,60 @@
-10454,Sony Turntable - PSLX350H,,,92,4
-11914,Bose Acoustimass 5 Series III Speaker System - AM53BK,,,29,5
-11036,Sony Switcher - SBV40S,,,55,6
-10387,Sony 5 Disc CD Player - CDPCE375,,,90,7
-11467,Bose 27028 161 Bookshelf Pair Speakers In White - 161WH,,,93,8
-10255,Denon Stereo Tuner - TU1500RD,,,72,9
-11366,KitchenAid Pasta Roller And Cutter - KPRA,,,41,10
-10531,Panasonic Yeast Pro Automatic Breadmaker - SDYD250,,,76,11
-10089,Sony Vertical-In-The-Ear Stereo Headphones - MDRJ10,,,98,12
-10149,Panasonic 2-Line Integrated Telephone - KXTSC14W,,,62,13
-11900,Panasonic Integrated Telephone System - KXTS108W,,,59,14
-11427,Panasonic 2-Line Integrated Telephone System - KXTS208W,,,81,15
-10899,Sony 300 Disc CD Changer - CDPCX355,,,45,16
-11221,Sony 400 Disc MegaStorage CD Changer - CDPCX455,,,19,17
-10943,Panasonic Hands-Free Headset - KXTCA86,,,6,18
-10430,Panasonic Hands Free Headset  - KXTCA92,,,84,19
-11028,Cuisinart Convection-Oven-Toaster-Broiler With Exact Heat Sensor - TOB165WH,,,97,20
-11932,Frigidaire 24' White Built-In Dishwasher - FDB130WH,,,77,21
-11602,Cuisinart Cordless Electric Kettle - KUA17,,,27,22
-11926,Omnimount Wall Speaker Mount - 20WLBK,,,20,23
-10538,Omnimount Wall Speaker Mount - 20WLWH,,,76,24
-11897,Denon Semi-Automatic Turntable - Black Finish - DP29F,,,8,25
-11771,Sony Xplod 10-Disc Add-On CD/MP3 Changer - CDX565MXRF,,,86,26
-10033,Escort Passport Radar And Laser Detector - Black Finish - 8500,,,88,27
-10031,Peerless Wall TV Mounts In Black - PM1327BK,,,21,28
-11727,Panasonic Laser Toner Cartridge - KXFA83,,,13,29
-11032,Sony Compact Disc Player/Recorder - RCDW500C,,,70,30
-11766,Sanus WMS3B Black Weather Resistant Small Speaker Wall Mount - WMS3B,,,78,31
-11419,Sanus WMS3S Silver Weather Resistant Small Speaker Wall Mount - WMS3S,,,12,32
-10108,Sanus Euro Foundations Satellite Speaker Stand - EFSATB,,,5,33
-10380,Sanus Euro Foundations Satellite Speaker Stand - EFSATS,,,29,34
-10960,Onkyo 6 Disc CD Player Changer - DXC390B,,,87,35
-11885,Panasonic Corded Phone - KXTS3282B,,,82,36
-10958,Escort Cordless Solo Radar Detector - S2E,,,44,37
-11614,Garmin Deluxe Carrying Case - Black Finish - 0101023101,,,68,38
-10358,Kenwood 6-Disc CD Changer - KDCC669,,,96,39
-11129,Cuisinart Automatic Brew And Serve Coffeemaker - DTC975BK,,,80,40
-11721,Sharp Over The Counter Microwave Oven - R1214SS,,,87,41
-11903,Toshiba Rechargeable 5-Hour Battery Pack - MEDB05LX,,,75,42
-11500,GE GSD4000NWW White Built-In Dishwasher - GSD4000WH,,,65,43
-10249,Sony Stereo Audio Receiver - STRDE197,,,45,44
-11555,Maytag Bisque Over-The-Range Microwave Oven - MMV4205BT,,,59,45
-11009,Maytag Over-The-Range Microwave Oven - MMV5207BK,,,23,46
-11628,Panasonic Genius Prestige Inverter Microwave Convection Oven NNC994SS In Stainless Steel - NNC994SS,,,28,47
-11854,Sony Super Audio CD Player - SCDCE595,,,100,48
-10431,Whirlpool 24' Built-In Dishwasher - DU1100SS,,,12,49
-11697,Danby Twin Tub Washer - DTT420WH,,,26,50
-11117,Omnimount TV Top Shelf Mount - CCH1P,,,47,51
-10175,Omnimount TV Top Shelf Mount - CCH1B,,,19,52
-10908,Delonghi Twenty Four Seven Coffee Maker In Black - DC50B,,,85,53
-10617,Sanus Silver LCD Television Turntable - TVLCDS,,,97,54
-11102,Frigidaire 27' Electric Stack Washer Dryer Combo - FEX831WH,,,83,55
-11352,Olympus Olympus Ni-MH Quick Charger And Battery Set - B90SU,,,56,56
-10130,Sony Digital Photo Printer Paper 40 Pack  - SVMF40P,,,49,57
-10888,Canon Rechargeable Battery - 9763A001,,,97,58
-11594,Delonghi Twenty Four Seven Coffee Maker - DC50W,,,37,59
-11095,Universal IR/RF Remote - MX350,,,98,60
-11651,Universal IR/RF Aeros Remote Control- MX850 - MX850,,,26,61
-11528,Panasonic 5-Pack DVD-RAM Discs - LMAF120LU5,,,3,62
-11176,Belkin AC Anywhere - F5C400300W,,,28,63
-10722,Sanus 13' - 30' VisionMount Flat Panel TV Silver Wall Mount - VMFS,,,26,64
-11507,Weber Performer 22-1/2' Charcoal Grill - 841001,,,40,65
-11297,Sanus 13' - 30' Flat Panel TV Black Wall Mount - VM1B,,,92,66
-10182,Sony HD DVC Tape - DVM63HD,,,57,67
-10622,Sanus 15' - 40' Flat Panel TV Silver Wall Mount - VM400S,,,20,68
-10675,Sanus 15' - 40' Flat Panel TV Black Wall Mount - VM400B,,,11,69
-10118,Frigidaire Electric Dryer - FEQ1442WH,,,19,70
-10631,Delonghi Oil Filters - FK8,,,33,71
-11149,Danby Designer Portable Dishwasher - DDW1805WH,,,19,72
-11150,Canon Optura/Elura Accessory Kit - ACCESSORYKIT,,,49,73
-11783,Mosquito Magnet Defender Replacement Net - MM4000NET1,,,11,74
-10711,Panasonic Genius Countertop Microwave In White - NNH965WH,,,79,75
-10998,Weber Performer 22-1/2' Charcoal Grill - 848001,,,6,76
-10984,Whirlpool 24' Built-In Dishwasher - DU1055BK,,,2,77
-11615,Whirlpool 24' Built-In Dishwasher - DU1055SS,,,92,78
-11758,Cuisinart Countertop Griddler - GR4,,,68,79
-11385,Nikon AF Speedlight Accessory - SB600,,,66,80
-10218,Panasonic Genius Countertop Microwave In Black - NNH965BK,,,33,81
-11295,Sony Soft Cyber-Shot Carrying Case - LCSCST,,,30,82
-11432,Pioneer XM Digital Satellite Tuner for Pioneer Headunits - GEXP920XM,,,30,83
-11092,Sanus Universal Projector Ceiling Mount -  Black Finish - VMPR1B,,,23,84
-10854,OmniMount G-303 Gray Stellar Series Audio Tower - G303GR,,,33,85
-11833,Sennheiser RF Wireless Headphones - RS140,,,57,86
-10060,Kenwood iPod Mobile Interface - KCAIP500,,,49,87
-11556,Pioneer Wired Marine Remote Control Display - CDMR80D,,,84,88
-10133,Bose Second Zone Remote - PMC2,,,89,89
-11270,Sony 400-Disc DVD/SA-CD/CD Mega Changer - DVPCX995V,,,77,90
-10336,Sanus 32' - 84' Flat Panel TV Black Tilting Wall Mount - VMPL3B,,,64,91
-11298,Sony DVD-R Recordable Camcorder Media - 3DMR30L1H,,,67,92
-11365,Sony VAIO Neoprene Laptop Carrying Case - Black Finish - VGPAMC3,,,86,93
-11892,Canon Color Ink Tank - CL41CL,,,68,94
-10514,Canon Cyan Ink Tank - Cyan - CLI8C,,,100,95
-10002,Canon Magenta Ink Tank - Magenta - CLI8M,,,27,96
-11705,Canon Cyan Photo Ink Cartridge - Cyan - CLI8PC,,,47,97
-11152,Canon Magenta Photo Ink Cartridge - Magenta - CLI8PM,,,76,98
-11242,Canon Yellow Ink Cartridge - Yellow - CLI8Y,,,93,99
-11643,Canon Black Ink Cartridge - Black - PG40BK,,,29,99
-11314,Belkin Pro Series 16 Ft.  USB 2.0 Cable - F3U13316,,,29,99
-10142,Pioneer Voice Command Pack - Black Finish - CDVC1,,,24,99
-11229,Sony VAIO Neoprene Notebook With AC Adapter Case - Black Finish - VGPAMC2,,,31,99
+﻿01,IPhone4S,Smart Phone,NULL,NULL,30,111,01,111
+02,IPhone7+,Smart Phone,NULL,NULL,21,111,02,111
+03,Samsung Galaxy S7,Smart Phone,NULL,NULL,15,111,03,111
+04,Samsung Galaxy Nexus,Smart Phone,NULL,NULL,12,111,04,111
+05,Caress Daily Silk Beauty Bar,Soap,NULL,NULL,11,321,05,321
+06,Dr. Bronner’s Classic Fair Trade Bar Soap,Soap,NULL,32,321,06,321
+07,Tide PureClean,Detergent,NULL,NULL,10,321,07,321
+08,Tide Plues Bleach Powder,Bleach,NULL,NULL,34,321,08,321
+09,Arizona Sectional Sofa,Furniture,NULL,NULL,12,312,09,312
+10,Urban Farm LL 128,fertilizer,NULL,NULL,10,325,10,325
+11,Jonathan Green 10458,Fertilizer,NULL,NULL,12,325,11,325
+12,baker Green Heirloom Seeds,Seeds,NULL,NULL,13,326,12,326
+13,Seeds of Change,Seeds,NULL,NULL,10,326,13,326
+14,Renee's Garden Seeds,Seeds,NULL,NULL,30,326,14,326
+15,The Black Book,Physical Book,NULL,NULL,25,411,15,411
+16,All By Myself,Physical Book,NULL,NULL,25,411,16,411
+17,The Chosen,Physical Book,NULL,NULL,25,411,17,411
+18,The Lost Order,Physical Book,NULL,NULL,25,411,18,411
+19,The Flame Alphabet,Physical Book,NULL,NULL,25,411,19,411
+20,Harry Potter and The Order of the Phoenix,Physical Book,NULL,NULL,25,411,20,411
+21,Gardens of the Moon,Digital Book,NULL,NULL,25,412,21,412
+22,The Crippled God,Digital Book,NULL,NULL,25,412,22,412
+23,Memories of Ice,Digital Book,NULL,NULL,25,412,23,412
+24,UE Boom 2,Speakers,NULL,NULL,17,511,24,511
+25,JBL Pulse 2,Speakers,NULL,NULL,17,511,25,511
+26,JBL Charge 2+,Speakers,NULL,NULL,17,511,26,511
+27,SoundTouch 10,Speakers,NULL,NULL,17,511,27,511
+28,UE Megaboom,Speakers,NULL,NULL,17,511,28,511
+29,Bose SoundLink Mini II,Speakers,NULL,NULL,17,511,29,511
+30,JBL Flip 3,Speakers,NULL,NULL,17,511,30,511
+31,Bose SoundLink Speaker III,Speakers,NULL,NULL,17,511,31,511
+32,TDK Life On Record Max A34,Speakers,NULL,NULL,17,511,32,511
+33,Sony SRS-X5,Speakers,NULL,NULL,17,511,33,511
+34,Seiko,Wristwatch,NULL,NULL,65,825,34,825
+35,Timex,Wristwatch,NULL,NULL,65,825,35,825
+36,Rolex,Wristwatch,NULL,NULL,65,825,36,825
+37,Lanvin,Belt,NULL,NULL,65,825,37,825
+38,Saint Laurent,Belt,NULL,NULL,65,825,38,825
+39,Givenchy,Belt,NULL,NULL,65,825,39,825
+40,Gucci,Belt,NULL,NULL,65,825,40,825
+41,Burberry,Belt,NULL,NULL,65,825,41,825
+42,Valvoline,Motor Oil,NULL,NULL,69,1124,42,1124
+43,Mobil 1,Motor Oil,NULL,NULL,69,1124,43,1124
+44,Casstrol, Motor Oil, NULL, NULL, 69, 1124,44,1124
+45,Amsoil,Motor Oil,NULL,NULL,69,1124,45,1124
+46,Pennzoil,Motor Oil,NULL,NULL,69,1124,46,1124
+47,Shell,Motor Oil,NULL,NULL,69,1124,47,1124
+48,Petronas,Motor Oil,NULL,NULL,69,1124,48,1124
+49,Fuchs,Motor Oil,NULL,NULL,69,1124,49,1124
+50,Motul,Motor Oil,NULL,NULL,69,1124,50,1124
+51,Lucas Oil,Motor Oil,NULL,NULL,69,1124,51,1124
+52,Synology RT2600ac,Router,NULL,NULL,73,527,52,527
+53,Asus RT-AC88U,Router,NULL,NULL,73,527,53,527 
+54,Amped Wireless Ally Plus,Router,NULL,NULL,73,527,54,527 
+55,Google WiFi,Router,NULL,NULL,73,527,55,527 
+56,Synology RT1900ac,Router,NULL,NULL,73,527,56,527 
+57,Netgear Orbi Wi-Fi System,Router, NULL, NULL, 73,527,57,527 
+58,Asus RT-AC3200,Router,NULL,NULL,73,527,58,527 
+59,TP-Link Deco M5 Whole-Home,Router,NULL,NULL,73,527,59,527
+60,Eero,Router,NULL,NULL,73,527,60,527

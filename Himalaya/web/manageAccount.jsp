@@ -28,11 +28,12 @@
             $.get("navbar.jsp", function(data){
                 $("#navbar").replaceWith(data);
             });
-        </script> 
+        </script>
         <!-- End load navigation bar -->
-    
+
         <div align="center" class="translucentDiv">
             <a href="treatYoSelf.jsp" class="btn btn-success">Treat Yo' Self Settings</a>
+            <a href="wishList.jsp" class="btn btn-success">Your Wishlist</a>
         <%
             try{
                 if (request.getParameter("submit") != null) {
@@ -93,10 +94,10 @@
                     preparedStmt.execute();             // execute the preparedstatement
 
                     out.println("<h3 style=\"color:green;display:table;margin:0 auto;\">You info has been successfully updated</h3>");
-                    
+
                     connection.close();
                 }
-                
+
                 // --- Check that user is logged in --- //
                 if (request.getSession().getAttribute("email") == null){
                     out.println("<h3 style=\"color:red;display:table;margin:0 auto;\">You must be logged in view account info</h3>");
@@ -121,7 +122,7 @@
 
                     rs.next();
                 %>
-    
+
         <h1 align="center">Update your information here</h1>
         <form name="updateUser" method="POST" action="manageAccount.jsp" onsubmit="return validate_form();">
                 <table align = "center" border="0">
@@ -268,9 +269,9 @@
                 </table>
             </form>
         </div>
-                
+
         <%
-        
+
                     connection.close();
                 }
             }

@@ -73,15 +73,14 @@
 
         <div class="translucentDiv">
             <%
+            InitialContext initialContext = new InitialContext();
+            Context context = (Context) initialContext.lookup("java:comp/env");
+            //The JDBC Data source that we just created
+            DataSource ds = (DataSource) context.lookup("himalaya");
+            Connection connection = ds.getConnection();
             try{
             // --- Get item info --- //
                 if (request.getParameter("CID") != null){
-                    InitialContext initialContext = new InitialContext();
-                    Context context = (Context) initialContext.lookup("java:comp/env");
-                    //The JDBC Data source that we just created
-                    DataSource ds = (DataSource) context.lookup("himalaya");
-                    Connection connection = ds.getConnection();
-
                     if (connection == null)
                     {
                         throw new SQLException("Error establishing connection!");
@@ -123,20 +122,64 @@
                         out.print("<h2>No Items are currently for sale in this category please come back later</h2>");
                     }
                     else{
-                        while(rs.next()){
-                            out.print("<a href=\"item.jsp?itemID="+ rs.getString("itemID") +"\">");
-                            out.print(rs.getString("itemID")+" "+rs.getString("name")+"</br>");
-                            out.println("</a>");
-                        }
+                      PreparedStatement checkPurchase = null;
+                      ResultSet purchaseCheck = null;
 
-                    }
+                      out.print("<table class=\"table table-striped table-responsive\">");
+                            out.print("<tr>"+
+                            "<td></td>"+
+                            "<td>Item Name:</td>"+
+                            "<td>Direct Price</td>"+
+                            "<td>Current/Minimum Bid</td>"+
+                            "<td>Go Buy!</td></tr>");
 
-                    connection.close();
+                      while (rs.next())
+                      {
+                              out.print("<tr><td><img style=\"max-width:60%;\" src=\""+ rs.getString("img_url") + "\"></td><td>"+rs.getString("name")+"</td>");
+                              checkPurchase = connection.prepareStatement("SELECT * FROM dsalemethod WHERE itemID =?");
+                              checkPurchase.setString(1, rs.getString("itemID"));
+                              purchaseCheck = checkPurchase.executeQuery();
+
+                              if(purchaseCheck.isBeforeFirst()){
+                                  while(purchaseCheck.next()){
+                                      out.println("<td>"+purchaseCheck.getString("price")+"</td>");
+                                  }
+                              }
+                              else{
+                                  out.println("<td>N/A</td>");
+                              }
+
+                              checkPurchase = connection.prepareStatement("SELECT * FROM biddingmethod WHERE itemID=?");
+                              checkPurchase.setString(1, rs.getString("itemID"));
+                              purchaseCheck = checkPurchase.executeQuery();
+
+                              if(purchaseCheck.isBeforeFirst()){
+                                  while(purchaseCheck.next()){
+                                      if(purchaseCheck.getString("current_bid")!= null){
+                                          out.println("<td>"+purchaseCheck.getString("current_bid")+"</td>");
+                                      }
+                                      else{
+                                          out.println("<td>"+purchaseCheck.getString("min_bid")+"</td>");
+                                      }
+                                  }
+                              }
+                              else{
+                                  out.println("<td>N/A</td>");
+                              }
+
+
+                              out.println("<td><a href=\"item.jsp?itemID="+rs.getString("itemID")+"\" class=\"btn btn-success\"> Check it out!</a></td></tr>");
+                          }
+                      out.print("</table>");
                     }
+                }
+                connection.close();
             }
+
             catch (Exception e){
                     out.println("<h1>An error occurred<h1>");
                     out.println("Error: " + e.getMessage());
+                    connection.close();
             }
             %>
 

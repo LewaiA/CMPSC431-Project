@@ -279,7 +279,7 @@
                         }
 
                         // Show wishList button
-                        out.println("<a class= \"btn btn-default\" href=\"wishList.jsp?itemID="+request.getParameter("itemID")+"\">Add Item to Wishlist</a>");
+                        out.println("<a class= \"btn btn-default\" href=\"add2WishList.jsp?itemID="+request.getParameter("itemID")+"\">Add Item to Wishlist</a>");
                         connection.close();
                     }
                 }

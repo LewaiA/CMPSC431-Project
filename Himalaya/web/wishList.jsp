@@ -21,105 +21,105 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
+          <!-- Load navigation bar -->
+          <div id="navbar"></div>
+          <script>
+              $.get("navbar.jsp", function(data){
+                  $("#navbar").replaceWith(data);
+              });
+          </script>
+          <!-- End load navigation bar -->
+      <div class="translucentDiv">
+        <%
 
-        <!-- Load navigation bar -->
-        <div id="navbar"></div>
-        <script>
-            $.get("navbar.jsp", function(data){
-                $("#navbar").replaceWith(data);
-            });
-        </script>
-        <!-- End load navigation bar -->
-        <div class="translucentDiv">
-            <%
-            InitialContext initialContext = new InitialContext();
-            Context context = (Context) initialContext.lookup("java:comp/env");
-            //The JDBC Data source that we just created
-            DataSource ds = (DataSource) context.lookup("himalaya");
-            Connection connection = ds.getConnection();
-                try {
-                        // --- Check that user is logged in --- //
-                        if (request.getSession().getAttribute("email") == null){
-                            out.println("<h3 style=\"color:red;display:table;margin:0 auto;\">You must be logged in to add an item to a WishList!</h3>");
-                        }
-                        //otherwise if logged in start the process
-                        else{
-                            if (connection == null)
-                            {
-                                throw new SQLException("Error establishing connection!");
-                            }
+          InitialContext initialContext = new InitialContext();
+          Context context = (Context) initialContext.lookup("java:comp/env");
+          //The JDBC Data source that we just created
+          DataSource ds = (DataSource) context.lookup("himalaya");
+          Connection connection = ds.getConnection();
+          try{
+              String user_name = "";
 
-                            String user_name = "";
-                            String item_name = "";
+              PreparedStatement info = connection.prepareStatement("SELECT name FROM users WHERE email=?");
+              info.setString(1, (String)request.getSession().getAttribute("email"));
+              ResultSet getNames = info.executeQuery();
 
-                            PreparedStatement info = connection.prepareStatement("SELECT name FROM users WHERE email=?");
-                            info.setString(1, (String)request.getSession().getAttribute("email"));
-                            ResultSet getNames = info.executeQuery();
+              //get user name first
+              if(getNames.isBeforeFirst()){
+                  while(getNames.next()){
+                      user_name = getNames.getString("name");
+                  }
+              }
 
-                            //get user name first
-                            if(getNames.isBeforeFirst()){
-                                while(getNames.next()){
-                                    user_name = getNames.getString("name");
-                                }
-                            }
-                            //get item name
-                            info = connection.prepareStatement("SELECT name FROM Items WHERE itemID=" + request.getParameter("itemID"));
-                            getNames = info.executeQuery();
-                            if(getNames.isBeforeFirst()){
-                                while(getNames.next()){
-                                    item_name = getNames.getString("name");
-                                }
-                            }
+              //print out the User's Wishlist
+              out.println("<h1 align=\"center\">"+ user_name+"'s Wishlist</h1>");
+              PreparedStatement checkPurchase;
+              int count = 0;
+              PreparedStatement Wishlist = connection.prepareStatement("SELECT * FROM Wishlist WHERE email=?");
+              ResultSet purchaseCheck=null;
+              Wishlist.setString(1, (String) request.getSession().getAttribute("email"));
 
-                            //first check if the Item is already in the Users wishlist
-                            PreparedStatement Wishlist = connection.prepareStatement("SELECT * FROM Wishlist WHERE itemID = ? AND email=?");
-                            Wishlist.setString(1, request.getParameter("itemID"));
-                            Wishlist.setString(2, (String)request.getSession().getAttribute("email"));
-                            ResultSet wishList = Wishlist.executeQuery();
-                            //if item is wishlist inform user and move on
-                            if(wishList.isBeforeFirst()){
-                                out.println("<h1 align=\"center\">Item is already in your WishList!</h1>");
-                            }
-                            //otherwsie add item to the wishlist
-                            else{
-                                Wishlist = connection.prepareStatement("INSERT INTO Wishlist(date_added, itemID, name, email)"
-                                +"VALUES (?,?,?,?)");
+              ResultSet wishList = Wishlist.executeQuery();
 
-                                java.sql.Date todays_Date = new java.sql.Date(new java.util.Date().getTime());
-                                Wishlist.setDate(1, todays_Date);
-                                Wishlist.setString(2, request.getParameter("itemID"));
-                                Wishlist.setString(3, item_name);
-                                Wishlist.setString(4, (String) request.getSession().getAttribute("email"));
+              if(!wishList.isBeforeFirst()){
+                  out.print("<h1 align=\"center\"> There are currently no Items in your Wishlist!</h1>");
+              }
+              else{
+                  out.print("<table class=\"table table-striped table-responsive\">");
+                  out.print("<tr>"+
+                  "<td>Item Name:</td>"+
+                  "<td>Date Added:</td>"+
+                  "<td>Direct Price</td>"+
+                  "<td>Current/Minimum Bid</td>"+
+                  "<td>Go Buy!</td></tr>");
 
-                                Wishlist.execute();
-                                out.println("<h1 align = \"center\">"+item_name+" successfully added to " + user_name + "'s Wishlist!'</h1>");
-                            }
+                  while(wishList.next()){
 
-                            //print out the User's Wishlist
-                            out.println("<h1 align=\"center\">"+ user_name+"'s Wishlist</h1>");
+                      out.print("<tr><td>"+wishList.getString("name")+"</td><td>"+wishList.getDate("date_added")+"</td>");
+                      checkPurchase = connection.prepareStatement("SELECT * FROM dsalemethod WHERE itemID =?");
+                      checkPurchase.setString(1, wishList.getString("itemID"));
+                      purchaseCheck = checkPurchase.executeQuery();
 
-                            Wishlist = connection.prepareStatement("SELECT * FROM Wishlist WHERE email=?");
-                            Wishlist.setString(1, (String) request.getSession().getAttribute("email"));
+                      if(purchaseCheck.isBeforeFirst()){
+                          while(purchaseCheck.next()){
+                              out.println("<td>"+purchaseCheck.getString("price")+"</td>");
+                          }
+                      }
+                      else{
+                          out.println("<td>N/A</td>");
+                      }
 
-                            wishList = Wishlist.executeQuery();
+                      checkPurchase = connection.prepareStatement("SELECT * FROM biddingmethod WHERE itemID=?");
+                      checkPurchase.setString(1, wishList.getString("itemID"));
+                      purchaseCheck = checkPurchase.executeQuery();
 
-                            if(!wishList.isBeforeFirst()){
-                                out.print("<h1 align=\"center\"> There are currently no Items in your Wishlist!</h1>");
-                            }
-                            else{
-                                out.print("<h2> <u>Item Name</u> &emsp;&emsp;&emsp;&emsp;&emsp; <u>Date Added</u></h2>");
-                                while(wishList.next()){
-                                    out.print("<h3>"+wishList.getString("name")+" &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; "+wishList.getDate("date_added") + "</h3>");
-                                }
-                            }
-                            connection.close();
-                        }
-                    }
-                catch(Exception e){
-                    out.println("<h1>An error occurred<h1>");
-                    out.println("Error: " + e.getMessage());
-                    connection.close();
-                }
-            %>
+                      if(purchaseCheck.isBeforeFirst()){
+                          while(purchaseCheck.next()){
+                              if(purchaseCheck.getString("current_bid")!= null){
+                                  out.println("<td>"+purchaseCheck.getString("current_bid")+"</td>");
+                              }
+                              else{
+                                  out.println("<td>"+purchaseCheck.getString("min_bid")+"</td>");
+                              }
+                          }
+                      }
+                      else{
+                          out.println("<td>N/A</td>");
+                      }
 
-        </div>
+
+                      out.println("<td><a href=\"item.jsp?itemID="+wishList.getString("itemID")+"\" class=\"btn btn-success\"> Check it out!</a></td></tr>");
+                  }
+                  out.print("</table>");
+              }
+              connection.close();
+          }
+          catch(Exception e){
+              out.println("<h1>An error occurred<h1>");
+              out.println("Error: " + e.getMessage());
+              connection.close();
+          }
+        %>
+      </div>
+    </body>
+</html>

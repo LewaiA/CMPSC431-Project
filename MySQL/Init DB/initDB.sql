@@ -128,7 +128,7 @@ CREATE TABLE BiddingMethod(
 	PRIMARY KEY(itemID), 
 	FOREIGN KEY(itemID) REFERENCES Items (itemID) 
 		ON DELETE CASCADE ,
-	FOREIGN KEY(current_bidder) REFERENCES Users (email)
+	
 );
 
 CREATE TABLE PurchaseHistory(
