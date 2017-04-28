@@ -16,6 +16,15 @@
 
 <!DOCTYPE html>
 <html>
+      <div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>All Items</title>
@@ -115,5 +124,13 @@
                 }
             %>
         </div>
+        
     </body>
+      <div style="display:inline-block;vertical-align:top">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.Himalaya.com" data-text="Buy and sell electronics, cars, fashion apparel and everything else on Himalaya " data-via="Himalaya">Tweet</a>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
+    </script>
+</div>
+<div style="display:inline-block;vertical-align:top" class="fb-like" data-href="http://www.Himalaya.com"" data-send="false" data-width="450" data-show-faces="false" data-font="segoe ui">
+</div>    
 </html>
