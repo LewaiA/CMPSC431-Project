@@ -70,7 +70,7 @@
                             ResultSet rs = preparedStmt.executeQuery();
 
                             out.print("<h5>Choose your payment card</h5>");
-                            out.print("<select name=\"creditCard\">");
+                            out.print("<select class=\"form-control\" name=\"creditCard\">");
                             while (rs.next())
                             {
                                 out.print("<option value=\""
@@ -88,7 +88,7 @@
                             rs = preparedStmt.executeQuery();
                             
                             out.print("<h5>Choose your shipping address</h5>");
-                            out.print("<select name=\"shippingAddress\">");
+                            out.print("<select class=\"form-control\" name=\"shippingAddress\">");
                             while (rs.next())
                             {
                                 out.print("<option value=\""
